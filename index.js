@@ -18,17 +18,8 @@ const compression = require('compression');
 const app = express();
 
 
-// const store = new MongoDBStore({
-//   uri: "mongodb://tchgzns_admin:zuOW5Xir@serv01.teachingzones.com:27017",
-//   databaseName: 'tchgzns_Main',
-//   collection: "sessions"
-// },
-//   function (error) {
-//     console.log(error);
-//   })
 
-const MONGODBURI = `mongodb+srv://abdelrhman:ingodwetrust@edu-apps.uodvh.mongodb.net/smartacd?retryWrites=true&w=majority`;
-
+const MONGODBURI = `mongodb+srv://<username>:<password>@onlineshop-zsiuv.mongodb.net/<dbname>`;
 const store = new MongoDBStore({
     uri: MONGODBURI,
     collection: "sessions"
