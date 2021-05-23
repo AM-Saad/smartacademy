@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/teacher/lesson.css" />
+
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <input type="hidden" name="studentIdNotifi" value="<%=user._id%>">
+        <input type="hidden" name="lessonId" value="<%=lesson._id%>">
+        <h1 class="main-heading">
+            <%=lesson.name%>
+        </h1>
+        <div class="flex paginations">
+            <a href="/teachers/<%=teacher._id%>">Mr. <%=teacher.name%></a> >
+            <a href="/teachers/units/<%=lesson.teacher%>">جميع الوحدات</a> >
+            <a href="/teachers/units/unit/<%= lesson.unit %>"><%= unit.unitDetails.name %></a>
+
+        </div>
+        <%- include('../includes/message.ejs') %>
+        <div class="dynamic-tabs">
+            <ul class="tabs-list flex f-space-between m-4">
+                <li class="active " data-content="content-one">
+                    <button class="btn-main active"> فديوهات </button>
+                </li>
+                <li class="" data-content="content-six">
+                    <button class="btn-main"> محاضرات </button>
+                </li>
+                <li class="" data-content="content-two">
+                    <button class="btn-main"> امتحانات </button>
+                </li>
+                <li class="" data-content="content-five">
+                    <button class="btn-main">واجبات </button>
+                </li>
+                <li class="" data-content="content-three">
+                    <button class="btn-main"> ن.الاجابه </button>
+                </li>
+                <li class="" data-content="content-four">
+                    <button class="btn-main"> ملازم </button>
+                </li>
+            </ul>
+            <div class="content-list">
+
+                <%- include('./includes/videos_sessions.ejs') %>
+                <div class="content-two none" data-tab-content="content-two">
+                    <div class="flex f-space-between p-4">
+                        <h2>الامتحانات</h2>
+                    </div>
+                    <% if(exams.length > 0 ){ %>
+                    <div class="cards">
+                        <% exams.forEach(e =>{ %>
+                        <div class="card ">
+                            <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                            <div class="card-body">
+
+                                <img src="/images/examIcon.png" class="card-img" alt="...">
+                                <h2 class="card-title text-m">
+                                    <%= e.name %>
+                                </h2>
+                                <% if(e.pin) { %>
+                                <input type="number" class="form-control" name="pin" placeholder="Add pin" id="">
+                                <%}%>
+                                </div>
+                            <div>
+                                <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                                <input type="hidden" name="examType" value="exam" id="">
+
+                                <div class="card-actions">
+                                    <a class="btn-main openexam"
+                                        href="/exam/<%=e._id%>?lessonId=<%=lesson._id%>">ابتدي</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+
+                    <% } %>
+                </div>
+                <div class="content-three none" data-tab-content="content-three">
+                    <div class="flex f-space-between p-4">
+                        <h2>نماذج الاجابه</h2>
+                    </div>
+                    <% if(lesson.modelAnswers.length > 0 ){ %>
+
+                    <div class="cards">
+                        <%lesson.modelAnswers.forEach(f =>{ %>
+                        <div class="card ">
+                            <h2>
+                                <%=f.fileTitle%>
+                            </h2>
+                            <div class="card-actions">
+                                <a class="btn btn-info" href="/pdf/<%=f.fileName%>">افتح</a>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+                    <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+                    <% } %>
+                </div>
+                <div class="content-four none" data-tab-content="content-four">
+                    <div class="flex f-space-between p-4">
+                        <h2>الملازم</h2>
+                    </div>
+                    <% if(lesson.pdfs.length > 0 ){ %>
+
+                    <div class="cards">
+                        <%lesson.pdfs.forEach(f =>{ %>
+                        <div class="card ">
+                            <h2>
+                                <%=f.fileTitle%>
+                            </h2>
+                            <div class="card-actions">
+                                <a class="btn btn-info" href="/pdf/<%=f.fileName%>">افتح</a>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+                    <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+                    <% } %>
+                </div>
+                <div class="content-five none" data-tab-content="content-five">
+                    <div class="flex f-space-between p-4">
+                        <h2>الواجبات</h2>
+                    </div>
+
+                    <% if(homework.length > 0 ){ %>
+                    <div class="cards">
+                        <% homework.forEach(e =>{ %>
+                        <div class="card ">
+                            <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                            <div class="card-body">
+
+                                <img src="/images/examIcon.png" class="card-img" alt="...">
+                                <h2 class="card-title text-m">
+                                    <%= e.name %>
+                                </h2>
+                                <% if(e.pin) { %>
+                                <input type="number" class="form-control" name="pin" placeholder="Add pin" id="">
+                                <%}%>
+                                    </div>
+                                <div>
+                                    <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                                <input type="hidden" name="examType" value="homework" id="">
+
+                                <div class="card-actions">
+                                    <a class="btn-main openexam"
+                                        href="/exam/<%=e._id%>?lessonId=<%=lesson._id%>">ابتدي</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="frame none">
+            <div class="inside-frame">
+                <i class="close-vid close fas fa-times c-b font-xl"></i>
+                <iframe frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+    <script src="/js/student/check-exam.js"></script>
+    <script src="/js/student/play-video.js"></script>
+
+
+</body>
+
+</html>

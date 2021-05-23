@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/teacher/new-item.css">
+  <title>
+    <%= pageTitle %>
+  </title>
+</head>
+
+<body>
+  <%- include('../includes/nav.ejs') %>
+  <div class="wrapper">
+    <%if(!editing){ %>
+    <h1 class="main-heading">درس جديد</h1>
+    <%}%>
+    <%if(editing){ %>
+    <h1 class="main-heading">تعديل بيانات الدرس</h1>
+    <%}%>
+    <div id="addLesson">
+      <%- include('../includes/message.ejs') %>
+
+    <form action=" <% if (editing) { %>/teacher/lesson/edit/<%=lessonId%><% }else {%>/teacher/lesson/<%= unitId %> <%}%>" id="addLessonform" method="POST" enctype="multipart/form-data">
+      <div class="img-input-container">
+        <img src="/<% if (editing){ %><%=lesson.image%><%}else{%>images/lesson-image.png<%}%>" class="" alt="Uploaded file"
+    id="uploadImg" width="100">
+    <label class="label" for="image">Please upload a picture !</label>
+    <div class="input">
+        <input name="image" id="file" type="file">
+    </div>
+</div>
+      <div class="form-group">
+        <label for="lessonName">اسم الدرس</label>
+        <input class="form-control" type="text" name="lessonName" id="lessonName" placeholder="ادخل اسم الدرس"
+          value="<% if (hasError || editing) { %><%= lesson.name %><% } %>" id="" />
+  </div>
+
+  <div class="form-group">
+    <label for="lessonNo">Lesson Number</label>
+    <input class="form-control" type="number" name="lessonNo" id="lessonNo" placeholder="ادخل رقم الدرس" id=""
+      value="<% if (hasError || editing) { %><%= lesson.lessonNo %><% } %>" />
+  </div>
+
+  <div class="form-group bg-main border-r-m" style="display: inline-block;">
+    <label for="locked">مدفوع</label>
+    <%if(!editing){ %>
+    <input class="form-" type="checkbox" name="locked" id="locked" />
+    <%}%>
+    <%if(editing && lesson.locked){ %>
+    <input class="form-" type="checkbox" name="locked" id="locked" checked />
+    <%}%>
+    <%if(editing && !lesson.locked){ %>
+    <input class="form-" type="checkbox" name="locked" id="locked" />
+    <%}%>
+  </div>
+
+  <div class=" form-group">
+
+    <button type="submit" style="grid-column:1/3; float: left;" class="btn btn-success"> <%if(editing) { %>تعديل
+    الدرس<%} else {%>انشئ الدرس<%}%></button>
+  </div>
+
+  </form>
+  <!-- <div id="instructions" class="p-2">
+    <p class="">
+      <span>*</span>Hint</p>
+    <ul>
+
+      <li>
+        Add Pin Code to make the lesson private, if added to open student have to add the pin.
+      </li>
+      <li>
+        Add Image relative to the lesson subject, this's not must but (recommended).
+      </li>
+      <li>
+        Make Sure To Add Correct Lesson Number, recommended to look at the last lesson number for same unit before
+        add this (lesson
+        number).
+      </li>
+      <li>
+        Carefully add lesson information to avoid conflicts.
+      </li>
+    </ul>
+  </div> -->
+  </div>
+
+  </div>
+  <%- include('../includes/end.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/teacher/exam.css" />
+  <title>
+    <%= pageTitle%>
+  </title>
+</head>
+
+<body>
+  <%- include('../includes/nav.ejs') %>
+  <div style="position: relative;" class="wrapper">
+    <%- include('../includes/message.ejs') %>
+
+    <input type="hidden" value="<%=homeworkId%>" name="homeworkId">
+    <div id="holders">
+      <section class="placeHolder" style="height: 300px;">
+        <article class="background">
+          <div class="a"></div>
+          <div class="b"></div>
+          <div class="c"></div>
+          <div class="d"></div>
+          <div class="e"></div>
+          <div class="f"></div>
+          <div class="g"></div>
+          <div class="h"></div>
+          <div class="i"></div>
+          <div class="j"></div>
+          <div class="k"></div>
+          <div class="l"></div>
+        </article>
+      </section>
+      <section class="placeHolder">
+        <article class="background">
+          <div class="g"></div>
+          <div class="h"></div>
+          <div class="i"></div>
+          <div class="j"></div>
+          <div class="k"></div>
+          <div class="l"></div>
+        </article>
+      </section>
+    </div>
+    <div class="header" style="opacity:0;">
+      <div class="header-header p-relative">
+        <div class="header-info">
+
+        </div>
+ 		<div class="header-actions">
+          <a class="p-3  toggle-settings"> Settings</a>
+        </div> 
+
+        <form action="/teacher/homework/settings/<%=homeworkId%>" method="POST" class="settings external-box none">
+          <h2>Settings</h2>
+          <i class="fas fa-times close toggle-settings"></i>
+          <div class="">
+            <h4>Add Name:</h4>
+            <div class="form-group">
+              <label for="min">Name</label>
+              <input class="form-control" type="text" name="name">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+        <div id="NewQuestionForm" class="dynamic-tabs position-absolute none">
+          <span class="text-dark float-right mr-1 mt-1" id="closeQuestionForm">
+            <i class="fas fa-times "></i>
+          </span>
+          <ul class="tabs-list">
+            <li class="active" data-questionType='choose' data-content=".content-one">Choose</li>
+            <li data-questionType='written' data-content=".content-two">Written</li>
+            <li data-questionType='paragraph' data-content=".content-three">Paragraph</li>
+            <li data-questionType='truefalse' data-content=".content-four">True/False</li>
+          </ul>
+          <div class="content-list">
+            <div class="content-one grid">
+              <div class="form-group questionPreview">
+                <div data-id="questionText" class="questionsInputs inputActive form-control">
+                  Question
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="answerone" class="questionsInputs form-control">
+                  Answer 1
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="answertwo" class="questionsInputs form-control">
+                  Answer 2
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="answerthree" class="questionsInputs form-control">
+                  Answer 3
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="answerfour" class="questionsInputs form-control">
+                  Answer 4
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="correctAnswer" class="questionsInputs form-control">
+                  Correct Answer
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="image" class="questionsInputs form-control">
+                  <input type="file" style="width: 100%;  background: transparent; border: none; height:unset;"
+                    class="questionImg" name="questionImg">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+            </div>
+            <div class="content-two">
+              <div class="form-group questionPreview">
+                <div data-id="questionText" class="questionsInputs form-control">
+                  Question
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="questionScore" class="questionsInputs form-control">
+                  Question Score <span style="font-size:10px">Default is: 1</span>
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="image" class="questionsInputs form-control">
+                  <input type="file" style="width: 100%;  background: transparent; border: none; height:unset;"
+                    class="questionImg" name="questionImg">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+            </div>
+            <div class="content-three">
+              <div class="form-group questionPreview">
+
+                <div data-id="questionText" class="questionsInputs form-control">
+                  Question
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="questionScore" class="questionsInputs form-control">
+                  Question Score <span style="font-size:10px">Default is: 1</span>
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="image" class="questionsInputs form-control">
+                  <input type="file" style="width: 100%;  background: transparent; border: none; height:unset;"
+                    class="questionImg" name="questionImg">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+
+            </div>
+            <div class="content-four">
+              <div class="form-group questionPreview">
+
+                <div data-id="questionText" class="questionsInputs form-control">
+                  Question
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="correctAnswer" class="questionsInputs form-control">
+                  Correct Answer
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div data-id="image" class="questionsInputs form-control">
+                  <input type="file" style="width: 100%;  background: transparent; border: none; height:unset;"
+                    class="questionImg" name="questionImg">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div id="textFormater" class="container">
+            <!-- Create the editor container -->
+            <!-- Create toolbar container -->
+            <div id="toolbar">
+            </div>
+            <button class="btn" id="openSymbols">Symbols</button>
+            <div id="symbols"></div>
+            <div class="editor"></div>
+            <div class="textFormater_actions">
+              <button class="btn alert-warning" id="addInput">Add</button>
+              <button class="submitQuestion confirm-question btn btn-info">Submit Question</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <i id="addQuestion" class="fas fa-plus-circle "></i>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Theme included stylesheets -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
+  <!-- Core build with no theme, formatting, non-essential modules -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script>
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
+  <!-- Initialize Quill editor -->
+  <%- include('../includes/end.ejs') %>
+  <script src="/js/teacher/components/questions.js"></script>
+  <script src="/js/teacher/components/questionPrev.js"></script>
+  <script src="/js/teacher/components/analytics.js"></script>
+  <script src="/js/teacher/homework.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+</body>
+
+</html>

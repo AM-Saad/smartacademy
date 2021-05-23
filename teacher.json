@@ -1,0 +1,19 @@
+    {
+        "lessons": {
+            "lesson": []
+        },
+        "image": "images/teacher.svg",
+        "centers": [],
+        "isTeacher": true,
+        "isAssistent": false,
+        "isOwner": true,
+        "requests": [],
+        "events": [],
+        "stars": [],
+        "_id": "5fe690473116e0144c626def",
+        "name": "Mr.Mahmoud Al-Araby",
+        "mobile": "01114002998",
+        "password": "$2a$12$.m9hXgag0rMTBbiXkbhReOWG7C9g8ADna0Y/XBMgfNMKweZ/gGBCG",
+        "center": [],
+        "assistents": []
+    }

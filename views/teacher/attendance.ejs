@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/teacher/attendance.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+
+        <div class="attendance-sheet scaleable bg-w">
+            <div id="editSalesForm" class="inside-wrapper w-100">
+                <i class="stop-scan close fas fa-times"></i>
+                <!--Main Actions -->
+                <aside class="main-actions flex f-space-between">
+                    <h3 class="title"></h3>
+                </aside>
+                <div class="content">
+                    <div class="column" style="float: left;">
+                        <div class="indecator">
+                            <p class="dates-date"> Students/Dates</p>
+                        </div>
+                        <div class="students"> </div>
+                    </div>
+                    <div class="body" style="float: right;">
+                        <div class="dates flex">
+                        </div>
+                        <div class="attendance">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="options">
+                <div class="flex f-space-between">
+                    <h2>Attendance</h2>
+                    <button class="main-actions_action btn btn-success new-session">Create Session:</button>
+                </div>
+                <aside class="filters section-filters">
+                    <i class="fas fa-times toggle-filters close c-b i-bg font-s"></i>
+                    <div id="reportrange" class="none">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class=" m-medium ">
+                        <form action="">
+
+                            <label for="">Choose Center: </label>
+                            <div class="form-check filter-grade-item form-check-inline">
+                                <input type="radio" class="form-check-input" name="center" id="default" value="default" />
+                                <label for="default">default</label>
+                            </div>
+                            <% centers.forEach(c => { %>
+                            <div class="form-check filter-grade-item form-check-inline">
+                                <input type="radio" class="form-check-input" name="center" id="<%=c%>" value="<%=c%>" />
+                                <label for="<%=c%>"><%=c%></label>
+                            </div>
+                            <% }) %>
+                        </form>
+                        <form action="">
+                            <label for="">Choose Grade: </label>
+                            <div class="form-check filter-grade-item form-check-inline">
+                                <input type="radio" class="form-check-input" name="grade" id="gradeone" value="1" />
+                                <label for="gradeone">1</label>
+
+                            </div>
+                            <div class="form-check filter-grade-item form-check-inline">
+                                <input type="radio" class="form-check-input" name="grade" id="gradetwo" value="2" />
+                                <label for="gradetwo">2</label>
+                            </div>
+                            <div class="form-check filter-grade-item form-check-inline">
+                                <input type="radio" class="form-check-input" id="gradethree" name="grade" value="3" />
+                                <label for="gradethree">3</label>
+                            </div>
+                        </form>
+                    </div>
+                    <button class="btn btn-info search-attendance">Search</button>
+                </aside>
+            </section>
+            <section class="scan-section">
+                <div class="session-info">
+                    <input type="hidden" name="" id="number">
+                    <input type="hidden" name="" id="center">
+                    <input type="hidden" name="" id="grade">
+                </div>
+                <div class="session-students"></div>
+            </section>
+            <div class="external-box startSession w-25 filters none">
+                <i class="fas fa-times new-session close"></i>
+                <h3 class="bg-lightgray p-1">Create Session</h3>
+                <form class="centers ">
+                    <% centers.forEach(c => { %>
+                    <div class="center form-check filter-grade-item form-check-inline">
+                        <input type="radio" class="form-check-input" class="sessionGrade" id="sin<%=c%>" name="sessionCenter" value="<%=c%>" />
+                        <label for="sin<%=c%>"><%=c%></label>
+                    </div>
+                    <% }) %>
+                </form>
+                <form class="grades">
+                    <div class="grade form-check filter-grade-item form-check-inline">
+                        <input type="radio" class="form-check-input" name="sessionGrade" id="grade1" value="1" />
+                        <label for="grade1">1</label>
+                    </div>
+                    <div class="grade form-check filter-grade-item form-check-inline">
+                        <input type="radio" class="form-check-input" name="sessionGrade" id="grade2" value="2" />
+                        <label for="grade2">2</label>
+                    </div>
+                    <div class="grade form-check filter-grade-item form-check-inline">
+                        <input type="radio" class="form-check-input" name="sessionGrade" id="grade3" value="3" />
+                        <label for="grade3">3</label>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <label for="sessionNo">Number</label>
+                    <input type="number" class="form-control" min="0" name="sessionNo" id="sessionNo">
+                </div>
+                <button type="submit" class="btn btn-info create-session">Create</button>
+            </div>
+
+
+        </main>
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+
+    <script src="/js/jquery.scannerdetection.js"></script>
+
+    <script src="/js/JsBarcode.all.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="/js/helpers/message.js"></script>
+    <script src="/js/helpers/request.js"></script>
+    <script src="/js/teacher/components/attendance.js"></script>
+    <script src="/js/teacher/attendance.js"></script>
+
+
+</body>
+
+</html>

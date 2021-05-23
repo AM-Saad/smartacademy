@@ -1,0 +1,55 @@
+<header class="main-header clearfix" role="header">
+	<div class="logo">
+		<img src="/images/noword.png" class="hidden-l" style="height: 50px;" alt="">
+		<a class="hidden-sm" href="/">
+			<img src="/images/with_word.png"  style="height: 50px;" alt="">
+		</a>
+		<a class="logo-link" href="/"><em>Smart</em> Academy</a>
+		<%- include('./search.ejs') %>
+	</div>
+	<a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+	<%if(!isLoggedIn) { %>
+	<nav id="menu" class="main-nav" role="navigation">
+		<ul class="main-menu">
+			<li><a class="external" href="/">الرئيسيه</a></li>
+			<!-- <li><a href="#section4">Courses</a></li> -->
+			<li><a class="external" href="/public/subjects">المواد الدراسيه</a></li>
+
+			<!-- <li><a href="#section5">Video</a></li> -->
+			<li><a class="external" href="/login">تسجيل الدخول</a></li>
+			<li class="active"><a class="external " href="/signup">اشترك الان</a></li>
+			<li class=><a class="external " href="/public/contact">اتصل بنا</a></li>
+		</ul>
+	</nav>
+	<%}%>
+	<%if(isLoggedIn && isTeacher) { %>
+	<nav id="menu" class="main-nav" role="navigation">
+		<ul class="main-menu">
+			<li><a class="external" href="/teacher/units">المنهج</a></li>
+			<li><a class="external" href="/teacher/students">طلابك</a></li>
+			<li><a class="external" href="/teacher/pins">الاكواد</a></li>
+			<li><a class="external" href="/teacher/profile">الحساب الشخصي</a> </li>
+			<li><a class="external" href="/teacher/settings">الاعدادات</a></li>
+			<%if(isLoggedIn && isOwner) { %>
+
+			<li><a class="external" href="/admin/teacherStatus">المدرسين</a></li>
+			<%}%>
+
+			<li><a class="external" href="/logout">تسجيل الخروج</a></li>
+		</ul>
+	</nav>
+	<%}%>
+			<%if(isLoggedIn && !isTeacher) { %>
+			<nav id="menu" class="main-nav" role="navigation">
+				<ul class="main-menu">
+					<li><a class="external" href="/public/subjects">المواد الدراسيه</a></li>
+					<%if(user != undefined) { %>
+					<li><a class="external" href="/profile/<%=user._id%>">الصفحه الشخصيه</a> </li>
+					<%}%>
+
+					<li><a class="external" href="/logout">تسجيل الخروج</a></li>
+				</ul>
+			</nav>
+			<%}%>
+
+</header>

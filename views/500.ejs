@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./includes/head.ejs') %>
+
+    <title><%= pageTitle %></title>
+    <style>
+        body{
+            background: #f9f9f9
+        }
+        .errImg{
+            
+            height: 60%;
+              width: 55%;
+              margin: auto
+        }
+      @media only screen and (min-width: 320px) and (max-width: 575px) {
+          .errImg{
+              height: 70%;
+              width: 100%
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="p-2">Something Went Wrong (500)</h2>
+      <p class="lead p-2">
+        We'll work on it, but maybe related to network issue or you dont have
+        premissions to access this page, please try another page or<br />
+        if you'er the admin check with your company.
+      </p>
+      <img class="errImg" src="/images/19796.jpg" alt="" srcset="" />
+    </div>
+    <%- include('./includes/end.ejs') %>
+  </body>
+</html>

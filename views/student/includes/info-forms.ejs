@@ -1,0 +1,81 @@
+<%if(user._id.toString() === studentInfo._id.toString()){ %>
+<div class="content-three <% if (!hasError) { %> none<% } %>" id="editInfoForm" data-tab-content="content-three">
+
+    <div>
+        <h3>تعديل بياناتك الشخصيه</h3>
+        <form action="/info" method="POST" enctype="multipart/form-data">
+
+            <input type="hidden" name="studentId" value="<%= student._id %>">
+            <input type="hidden" name="studentIdNotifi" value="<%= user._id %>">
+            <div class="img-input-container">
+                <img src="/<%=studentInfo.image ? studentInfo.image : 'images/user.png'%>" class="" alt="Uploaded file"
+                    id="uploadImg" width="100">
+                <label class="label" for="image">Please upload a picture !</label>
+                <div class="input">
+                    <input name="image" id="file" type="file">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">الاسم:</label>
+                <input class="form-control" type="text" name="name" value="<%=studentInfo.name%>" id="" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">رقم الموبيل:</label>
+                <input class="form-control" type="text" name="mobile" value="<%=studentInfo.mobile%>" id="" required>
+            </div>
+            <div class="form-group">
+                <label for="classroom">السنه الدراسيه:</label>
+                <select name="classroom" class="form-control" id="classroom" required>
+                    <option value="<% if (hasError) { %><%= oldInputs.updatedClassroom %><% } %>">
+                    </option>
+                    <option value="firstgradesecondary">الاول الثانوى</option>
+                    <option value="secondgradesecondary">الثانى الثانوى</option>
+                    <option value="thirdgradesecondary">الثالث الثانوى</option>
+                    <option value="firstpreparatorygrade">الاول الاعدادى</option>
+                    <option value="secondpreparatorygrade">الثانى الاعدادى</option>
+                    <option value="thirdpreparatorygrade">الثالث الاعدادى</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">رقم ولي الامر:</label>
+                <input class="form-control" type="text" name="parentNo" value="<%=studentInfo.parentNo || ''%>" id="">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">المدرسه:</label>
+                <input class="form-control" type="text" name="school" value="<%=studentInfo.school || ''%>" id=""
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">المحافظه:</label>
+                <input class="form-control" type="text" name="governorate" value="<%=studentInfo.governorate || ''%>"
+                    id="" required>
+            </div>
+
+
+
+
+            <button class="btn btn-success">نعديل</button>
+        </form>
+    </div>
+    <div>
+        <h3>تغيير الرقم السري</h3>
+        <form action="/info/password" method="POST">
+
+            <input type="hidden" name="studentId" value="<%= student._id %>">
+            <div class="form-group">
+                <label for="oldpass">الرقم السري</label>
+                <input class="form-control" type="password" name="oldpass" id="oldpass" required>
+            </div>
+
+            <div class="form-group">
+                <label for="newpass">الرقم السري الجديد</label>
+                <input class="form-control" type="password" name="newpass" id="newpass" required>
+
+            </div>
+
+            <button class="btn btn-success">تغيير</button>
+        </form>
+    </div>
+</div>
+
+<% } %>

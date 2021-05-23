@@ -1,0 +1,144 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/auth.css" />
+    <title> <%= pageTitle %></title>
+    <style>
+        .contacts>div h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contacts .contact-info .fas {
+            color: #f5aa00;
+            font-size: 2.1rem;
+            min-width: 4rem;
+            padding-top: .3rem;
+        }
+
+        .contacts .contact-info ul {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .contacts .contact-info ul li {
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .contacts .contact-info ul li:nth-child(2) ul li {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper" style="padding-top: 100px;">
+        <main>
+
+            <!-- About Details Start -->
+            <div class="about-details section-padding30">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+
+                            <div class="contacts" style="text-align: right;">
+                                <div class="contact-info">
+                                    <h2>معلومات الاتصال</h2>
+                                    <ul>
+                                        <li>
+                                            <i class="fas fa-compass"></i>
+
+                                            <p>14 شارع 23 شنوده من جسر السويس, القاهره. مصر
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-phone"></i>
+                                            <ul>
+                                                <li>
+                                                    <strong>استفسارات عامة</strong>
+                                                    <p>01156565910</p>
+                                                </li>
+                                                <li>
+                                                    <strong>مبيعات</strong>
+                                                    <p>01143451621</p>
+                                                </li>
+                                                <li>
+                                                    <strong>خدمة العملاء</strong>
+                                                    <p>01143451621</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <i class="f-icon envelope-icon"></i>
+                                            <p>hr@smartacademy.cc</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="contact-form">
+                                    <h2>إرسال رسالة</h2>
+
+                                    <div class="form">
+                                        <form class="form" id="contactusform" action="/public/contact/" method="post"
+                                            novalidate="novalidate">
+                                            <div class="form-group">
+                                                <label for="contact_name">الاسم</label>
+                                                <div class="field">
+                                                    <input type="text" class="form-control" id="contact_name"
+                                                        name="contact_name" placeholder="الاسم" required=""
+                                                        title="الاسم">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact_email">البريد الإلكتروني</label>
+                                                <div class="field">
+                                                    <input type="text" class="form-control" id="contact_email"
+                                                        name="contact_email" placeholder="البريد الإلكتروني" required=""
+                                                        title="البريد الإلكتروني">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact_email">الرسالة</label>
+                                                <div class="field">
+                                                    <textarea id="contact_message" class="form-control"
+                                                        name="contact_message" placeholder="الرسالة" required=""
+                                                        title="الرسالة"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <button type="submit" class="btn btn-primary"
+                                                    onclick="return onSuccess();">إرسال</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+            <!-- About Details End -->
+
+        </main>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+
+    <!-- JS here -->
+    <%- include('../includes/end.ejs') %>
+
+
+</body>
+
+</html>

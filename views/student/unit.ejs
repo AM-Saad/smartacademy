@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+        <title>
+            <%= pageTitle%>
+        </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+        <div class="wrapper">
+            <input type="hidden" name="studentIdNotifi" value="<%=user._id%>">
+
+            <h1 class="main-heading">
+                <%=unit.unitDetails.name%>
+            </h1>
+            <div class="flex paginations">
+                <a href="/teachers/<%=teacher._id%>">Mr. <%=teacher.name%></a> >
+                <a href="/teachers/units/<%=unit.teacher%>">جميع الوحدات</a>
+            </div>
+            <% if(lessons.length> 0 ) { %>
+                <div class="cards">
+                    <% lessons.forEach(l=> { %>
+                        <div class="card">
+
+                            <% if(l.locked){ %>
+                                <p class="badge bg-yellow">مدفوع</p>
+                                <% } else{ %>
+                                    <p class="badge bg-green">مجاني</p>
+                                    <%}%>
+
+                                        <div class="card-body">
+                                            <input type="hidden" name="lessonId" value="<%= l._id%>" id="">
+                                            <img src="/<%=l.image ? l.image : 'images/unitImage.jpg'%>" class="card-img"
+                                                alt="...">
+                                            <h2>
+                                                <%= l.name %>
+                                            </h2>
+                                        </div>
+                                        <div class="card-actions">
+                                            <% if(l.locked && !user.lessons.includes(l._id)){ %>
+                                                <div class="lesson-pin">
+                                                    <input type="text" class="form-control" name="studentpin"
+                                                        placeholder="ضع الرقم السري">
+                                                </div>
+                                                <% } %>
+                                                    <a href="/lesson/<%= l._id %>" class="btn-main openExam">افتح</a>
+                                        </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+
+                        <% } %>
+
+
+        </div>
+        <%- include('../includes/end.ejs') %>
+            <script src="/js/student/check-lesson.js"></script>
+
+
+</body>
+
+</html>

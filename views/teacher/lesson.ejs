@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/teacher/lesson.css" />
+
+
+    <title>
+      <%= pageTitle%>
+    </title>
+</head>
+<body>
+  <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+      <%- include('../includes/message.ejs') %>
+        <input type="hidden" name="lessonId" value="<%=lesson._id%>" id="">
+        <div id="single-unit" class="rounded p-3">
+          <div class="lessons_head">
+            <a href="/teacher/units/<%= lesson.unit %>">
+              <h2 class="main-heading">
+                <%=lesson.name%>
+              </h2>
+            </a>
+            <h4>عدد الطلاب: <%=lesson.students.length%>
+            </h4>
+          </div>
+          <div class="dynamic-tabs">
+            <ul class="tabs-list flex f-space-between m-4">
+
+              <li class="btn-wrapper active" data-content="content-one">
+                <button class="btn-main">فيديوهات</button>
+              </li>
+              <li class="btn-wrapper" data-content="content-six">
+                <button class="btn-main">الحصص</button>
+              </li>
+              <li class="btn-wrapper" data-content="content-five">
+                <button class="btn-main">الواجبات</button>
+              </li>
+              <li class="btn-wrapper" data-content="content-two">
+                <button class="btn-main">الامتحانات</button>
+              </li>
+              <li class="btn-wrapper" data-content="content-three">
+                <button class="btn-main">ن. الاجابه</button>
+              </li>
+              <li class="btn-wrapper" data-content="content-four">
+                <button class="btn-main">الملازم</button>
+              </li>
+            </ul>
+            <div class="content-list">
+
+              <%- include('./includes/videos.ejs') %>
+                <%- include('./includes/session.ejs') %>
+
+                  <div class="content-two none" data-tab-content="content-two">
+                    <div class="flex f-space-between p-4 border-r-l">
+                      <h2>الامتحانات</h2>
+                      <form action="/teacher/exam/<%=lesson._id%>?examType=exam" method="post">
+                        <button type="submit" class="btn btn-success addLesson">انشئ امتحان</button>
+                      </form>
+                    </div>
+                    <% if(exams.length> 0 ){ %>
+                      <div class="cards">
+                        <% exams.forEach(e=>{ %>
+                          <div class="card ">
+                            <div class="card-body">
+                              <h2>
+                                <%=e.name || 'غير مسمي' %>
+                              </h2>
+                            </div>
+                            <div class="card-actions">
+                              <a class="btn-main" href="/teacher/exam/<%=e._id%>?examType=exam">فتح</a>
+                              <a class="btn-main bg-red"
+                                href="/teacher/exam/delete/<%=lesson._id%>?examId=<%=e._id%>&&examType=exam">حذف</a>
+                            </div>
+                          </div>
+                          <%})%>
+                      </div>
+                      <% }else{ %>
+                        <%- include('./includes/fall-back.ejs') %>
+                          <% } %>
+                  </div>
+                  <div class="content-three none" data-tab-content="content-three">
+                    <div class="flex f-space-between p-4">
+                      <h2>نماذج الاجابه</h2>
+                      <button class="btn btn-success toggle-modelAnswer addLesson" data-form="newmodelanswer">ارفع ملف
+                      </button>
+                    </div>
+                    <form action="/teacher/lesson/files/<%=lesson._id%>?type=modelAnswers" method="POST"
+                      enctype="multipart/form-data" class="fileForm none" id="newmodelanswer">
+                      <i class="fas fa-times close c-w" data-form="newmodelanswer"></i>
+                      <div class="form-group">
+                        <label for="pdftitle">اسم الملف</label>
+                        <input type="text" name="fileTitle" class="form-control" placeholder="Add File Name...."
+                          id="pdftitle" required>
+                      </div>
+                      <input type="hidden" name="fileType" value="modelAnswers">
+
+                      <div class="form-group">
+                        <label for="modelanswer">اختار ملف</label>
+                        <input type="file" class="form-control" name="image" id="modelanswer" required>
+                      </div>
+
+                      <button type="submit">تأكيد</button>
+                    </form>
+                    <% if(lesson.modelAnswers.length> 0) { %>
+                      <div class="cards">
+                        <%lesson.modelAnswers.forEach(f=>{ %>
+                          <div class="card ">
+                            <h2>
+                              <%=f.fileTitle%>
+                            </h2>
+                            <div class="card-actions">
+                              <a class="btn btn-info" href="/pdf/<%=f.fileName%>">افتح</a>
+                              <a class="btn btn-danger"
+                                href="/teacher/lesson/files/<%=lesson._id%>?fileId=<%=f._id%>&&type=modelAnswers">حذف</a>
+                            </div>
+                          </div>
+                          <%})%>
+                      </div>
+                      <% }else{ %>
+                        <%- include('./includes/fall-back.ejs') %>
+                          <% } %>
+                  </div>
+                  <div class="content-four none" data-tab-content="content-four">
+                    <div class="flex f-space-between p-4">
+                      <h2>الملازم</h2>
+                      <button class="btn btn-success toggle-pdf-form" data-form="newpdf">ارفع ملزمه</button>
+                    </div>
+                    <form action="/teacher/lesson/files/<%=lesson._id%>?type=pdfs" method="POST"
+                      enctype="multipart/form-data" class="fileForm none" id="newpdf">
+                      <i class="fas fa-times close c-w" data-form="newpdf"></i>
+                      <div class="form-group">
+                        <label for="fileTitle">اسم الملازمه</label>
+                        <input type="text" name="fileTitle" class="form-control" placeholder="Add File Name...."
+                          id="fileTitle" required>
+                      </div>
+                      <input type="hidden" name="fileType" value="pdfs">
+                      <div class="form-group">
+                        <label for="pdfFile">اختار الملف</label>
+                        <input type="file" class="form-control" name="image" id="pdfFile" required>
+                      </div>
+                      <button type="submit">تأكيد</button>
+                    </form>
+                    <% if(lesson.pdfs.length> 0) { %>
+                      <div class="cards">
+
+                        <%lesson.pdfs.forEach(f=>{ %>
+                          <div class="card ">
+                            <h2>
+                              <%=f.fileTitle%>
+                            </h2>
+                            <div class="card-actions">
+                              <a class="btn btn-info" href="/pdf/<%=f.fileName%>">افتح</a>
+                              <a class="btn btn-danger"
+                                href="/teacher/lesson/files/<%=lesson._id%>?fileId=<%=f._id%>&&type=pdfs">حذف</a>
+                            </div>
+                          </div>
+                          <%})%>
+                      </div>
+                      <% }else{ %>
+                        <%- include('./includes/fall-back.ejs') %>
+                          <% } %>
+                  </div>
+
+
+                  <div class="content-five none" data-tab-content="content-five">
+                    <div class="flex f-space-between p-4 border-r-l">
+                      <h2>الواجبات</h2>
+                      <form action="/teacher/exam/<%=lesson._id%>?examType=homework" method="post">
+                        <button type="submit" class="btn btn-success addLesson">انشئ واجب</button>
+                      </form>
+                    </div>
+                    <% if(homework.length> 0 ){ %>
+                      <div class="cards">
+                        <% homework.forEach(e=>{ %>
+                          <div class="card ">
+                            <div class="card-body">
+                              <h2>
+                                <%=e.name || 'غير مسمي' %>
+                              </h2>
+                            </div>
+                            <div class="card-actions">
+                              <a class="btn btn-info" href="/teacher/exam/<%=e._id%>?examType=homework">فتح</a>
+                              <a class="btn btn-danger"
+                                href="/teacher/exam/delete/<%=lesson._id%>?examId=<%=e._id%>&&examType=homework">حذف</a>
+                            </div>
+                          </div>
+                          <%})%>
+                      </div>
+                      <% }else{ %>
+                        <%- include('./includes/fall-back.ejs') %>
+
+                          <% } %>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="frame none">
+          <div class="inside-frame">
+            <i class="close-vid close fas fa-times c-b font-xl"></i>
+            <iframe frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </div>
+        </div>
+    </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+      <script src="/js/teacher/videos.js"></script>
+      <script src="/js/teacher/session.js"></script>
+      <script src="/js/student/play-video.js"></script>
+
+      <script>
+        $('[data-form]').on('click', function (e) {
+          let form = $(this).data('form')
+          $(`#${form}`).toggleClass('none')
+        })
+      </script>
+
+</body>
+
+</html>

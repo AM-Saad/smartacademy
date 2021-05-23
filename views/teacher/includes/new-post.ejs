@@ -1,0 +1,79 @@
+<div class="posts_new-post-box">
+    <i class="fas fa-times posts_new-post-btn_close"></i>
+    <h3>خبر جديد</h3>
+    <div class="posts_new-post-box-selector flex f-space-evenly">
+        <div class="from-group posts-type_btn" style="background:#65de72">
+            <label for="public">عام
+                <i class="fas fa-lock-open"></i>
+            </label>
+            <input type="radio" class="postTypeBtn" name="postType" value="public" id="public">
+        </div>
+        <div class="form-group posts-type_btn ">
+            <label for="private">خاص
+                <i class="fas fa-lock"></i>
+            </label>
+            <input type="radio" class="postTypeBtn" name="postType" value="private" id="private">
+        </div>
+    </div>
+    <div class="addpostForm" id="privatepostForm">
+        <div class="post-options none">
+            <div class="filters">
+                <div class="m-b-4">
+                    <span>اختر المرحله</span>
+                    <form class="filter-grade-item posts_new-post-box-filter">
+                        <% teacher.classes.forEach(c =>{ %>
+
+                        <div class="form-check">
+                            <label for="<%=c.en%>"><%=c.ar%></label>
+                            <input class="gradeBtn" type="radio" value="<%=c.en%>" name="<%=c.en%>" id="<%=c.en%>">
+                        </div>
+                        <%})%>
+
+                    </form>
+                </div>
+                <div>
+                    <span>اختار المجموعه</span>
+                    <form class="filter-center-item posts_new-post-box-filter">
+                        <div class="form-check">
+                            <label for="default">
+                                الافتراضيه
+                            </label>
+                            <input type="radio" value="default" name="default" id="default" class="centerBtn">
+                        </div>
+                        <% if(centers.length > 0) { %>
+                        <% centers.forEach(c =>{ %>
+                        <div class="form-check">
+                            <label for="<%=c%>">
+                                <%=c%>
+                            </label>
+                            <input type="radio" value="<%=c%>" name="<%=c%>" id="<%=c%>" class="centerBtn">
+                        </div>
+                        <%})%>
+                        <%}%>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <textarea name="post-content" id="" cols="30" rows="10" class="form-control post-content post-content"
+                placeholder="اكتب الخبر ...."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="link">اضف رابط</label>
+            <input type="text" name="link" id="link" class="form-control post-link" placeholder="Add Link">
+        </div>
+
+        <div class="img-input-container">
+            <img class="" alt="Uploaded file" id="uploadImg" width="100">
+            <label class="label" for="image">Please upload a picture !</label>
+            <div class="input">
+                <input name="image" class="postImage" id="file" type="file">
+            </div>
+        </div>
+
+
+        <a class="submitpost btn btn-success">نشر</a>
+    </div>
+
+
+</div>

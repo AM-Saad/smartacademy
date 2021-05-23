@@ -1,0 +1,56 @@
+<div class="content-one" data-tab-content="content-one">
+    <div class="flex f-space-between p-4">
+        <h2>الفيديوهات</h2>
+    </div>
+    <%if(lesson.videos.length> 0) { %>
+    <div class="cards">
+
+
+        <% lesson.videos.forEach(v =>{ %>
+        <div class="card ">
+            <input type="hidden" name="examId" value="<%= lesson._id%>" id="">
+            <img src="/images/videoIcon.jpg" class="card-img" alt="...">
+            <h2 class="card-title text-m">
+                <%= v.title %>
+            </h2>
+            <div class="card-actions">
+
+                <a class="btn-main watch-vid" data-vn="<%= v.title %>" data-vp="<%= v.path %>">أتفرج</a>
+            </div>
+        </div>
+        <% }) %>
+
+    </div>
+
+    <% } else{ %>
+    <%- include('../includes/fall-back.ejs') %>
+
+    <%}%>
+</div>
+
+<div class="content-six none " data-tab-content="content-six">
+    <div class="flex f-space-between p-4">
+        <h2>محاضرات</h2>
+    </div>
+    <%if(lesson.live_sessions.length> 0) { %>
+    <div class="cards">
+        <% lesson.live_sessions.forEach(v =>{ %>
+        <div class="card ">
+            <input type="hidden" name="examId" value="<%= lesson._id%>" id="">
+            <img src="/images/videoIcon.jpg" class="card-img" alt="...">
+            <h2 class="card-title text-m">
+                <%= v.title %>
+            </h2>
+            <div>
+                <a class="btn btn-success" href="<%= v.path %>">أبدأ</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    <% } else{ %>
+    <%- include('../includes/fall-back.ejs') %>
+
+    <%}%>
+
+
+</div>

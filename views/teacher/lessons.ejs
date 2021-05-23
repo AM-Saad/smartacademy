@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <div id="single-unit" class="rounded p-3">
+
+            <div class="lessons" style="padding: 5px;">
+                <div class="flex f-space-between">
+                    <a href="/teacher/units">
+                        <h2 class="main-heading"><%=unit.unitDetails.name%> </h2>
+                    </a>
+                    <a class="btn btn-success addLesson" href="/teacher/addLesson/<%=unit._id%>">درس جديد</a>
+                </div>
+                <%- include('../includes/message.ejs') %>
+                <% if(lessons.length > 0){ %>
+                    <div class="cards">
+                        <% lessons.forEach(u =>{ %>
+                        <div class="card">
+                            <a href="/teacher/lesson/<%=u._id%>">
+                                <div class="card-body grid">
+                                    <img src="/<%=u.image ? u.image : 'images/lesson-image.png'%>"
+                                        class="card-img">
+                                    <h2><%=u.name%></h2>
+                                </div>
+                                <div class="card-actions">
+                                    <a class="btn-main" href="/teacher/lesson/edit/<%=u._id%>">تعديل</a>
+                                    <a class="btn-main bg-red deleteLesson" href="/teacher/lesson/delete/<%=u._id%>">حذف</a>
+                                </div>
+                            </a>
+            
+                        </div>
+                        <% }) %>
+                    </div>
+                    <% }else{ %>
+                    <%- include('./includes/fall-back.ejs') %>
+            
+                    <% } %>
+
+
+            </div>
+        </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+
+
+    <script>
+        function displayEditedUnitImage(e) {
+            console.log(e)
+            let photo = e.target.files[0];  // file from input
+            if (e.target.files && e.target.files[0]) {
+                var reader = new FileReader();
+                const tumbnialImage = $(e.target).siblings('.thum-img')
+                reader.onload = function (e) {
+                    tumbnialImage.attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+                tumbnialImage.removeClass('none')
+            }
+        }
+    </script>
+
+</body>
+
+</html>

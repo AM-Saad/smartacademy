@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/general/posts.css" />
+        <!-- <link rel="stylesheet" href="/css/student/main.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/teacher/home.css" /> -->
+        <link rel="stylesheet" href="/css/teacher/profile.css" />
+        <title>
+            <%= pageTitle%>
+        </title>
+</head>
+
+
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+        <div class="wrapper">
+
+            <%- include('../includes/message.ejs') %>
+                <div class="profile-container">
+                    <input type="hidden" name="teacherId" id="teacherId" value="<%=teacher._id%>">
+                    <div class="cover-photo">
+                        <img src="/<%=teacher.image? teacher.image : images/teacher.png%>" class="profile">
+                    </div>
+                    <div class="profile-name">
+                        <%=teacher.name%>
+                    </div>
+                    <div class="">
+                        <%=teacher.mobile%>
+                    </div>
+                    <p class="about">
+                        <%=teacher.bio%>
+                    </p>
+                    <div class=" profile-action flex">
+
+                        <a href="/teacher/units" class="btn-main">المنهج</a>
+                        <a href="/teacher/settings" class="btn-main">اعدادات الحساب</a>
+
+                    </div>
+                    <div>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-youtube"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+
+                <div class="materials">
+                    <div class="materials-actions tabs-list flex">
+                        <li data-content="content-one">أحدث الاضافات</li>
+                        <li data-content="content-two">اخبارك</li>
+                    </div>
+                    <div class="materials-wrapper">
+                        <div data-tab-content="content-one">
+                            <div class="flex f-space-between">
+                                <h3>احدث الاضافات</h3>
+                                <a href="/teacher/units" class="btn-main">المزيد</a>
+                            </div>
+                            <% if(units.length> 0){ %>
+                                <div id="teacher-units" class="cards">
+                                    <% units.forEach(u=> { %>
+                                        <a class="card p-2" href="/teacher/units/<%=u._id%>">
+                                            <div class="card-body">
+                                                <img src="/<%=u.unitDetails.image?u.unitDetails.image:'/images/unitImage.jpg' %>"
+                                                    class="card-img">
+                                                <h2>
+                                                    <%= u.unitDetails.name %>
+                                                </h2>
+                                            </div>
+                                        </a>
+                                        <% }) %>
+                                </div>
+                                <% }else{ %>
+                                    <%- include('./includes/fall-back.ejs') %>
+                                        <a href="/teacher/units/new" class="btn-main fallback_btn-main"> وحده جديده</a>
+                                        <% } %>
+                        </div>
+                        <div data-tab-content="content-two">
+                            <h3>أخبارك</h3>
+                            <div class="posts_new-post-btn">
+                                <span>خبر جديد</span>
+                                <span>
+                                    <i class="fas fa-image"></i>
+                                </span>
+                                <span>
+                                    <i class="fas fa-file-alt"></i>
+                                </span>
+                            </div>
+                            <%- include('./includes/new-post.ejs') %>
+
+                                <%- include('../includes/posts.ejs') %>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+        </div>
+
+
+        <%- include('../includes/end.ejs') %>
+            <script src="/js/components/posts.js"></script>
+            <script src="/js/components/comments.js"></script>
+
+            <script src="/js/teacher/posts.js"></script>
+
+</body>
+
+</html>

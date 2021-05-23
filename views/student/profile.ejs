@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" type="text/css" href="/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css" />
+    <link rel="stylesheet" href="/css/student/main.css" />
+    <title>
+      <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+  <%- include('../includes/nav.ejs') %>
+
+    <div class="wrapper">
+
+      <%- include('./includes/update-center_form.ejs') %>
+
+
+        <div class="container" id="student">
+          <div class="cover-photo">
+            <img src="/<%=studentInfo.image? studentInfo.image : images/student.png%>" class="profile">
+          </div>
+          <div class="profile-name">
+            <%=studentInfo.name%>
+          </div>
+          <%if(user._id.toString()===studentInfo._id.toString() || user.isTeacher){ %>
+
+            <p class="about">
+              <%=studentInfo.mobile%>
+            </p>
+            <% } %>
+
+              <%if(user._id.toString()===studentInfo._id.toString()){ %>
+
+                <ul class="tabs-list flex">
+                  <li class=" btn-wrapper" data-content="content-one">
+                    <button class="btn-main active"> الدروس </button>
+                  </li>
+
+                  <li class="btn-wrapper" data-content="content-two">
+                    <button class="btn-main"> الامتحانات السابقه </button>
+                  </li>
+                  <li id="editInfo" data-content="content-three" class="btn-wrapper">
+                    <button class="btn-main">تعديل البيانات</button>
+                  </li>
+                </ul>
+                <% } %>
+
+        </div>
+        <div class="dynamic-tabs">
+
+          <div class="content-list">
+            <div class="content-one <% if (hasError) { %> none<% } %>" data-tab-content="content-one">
+              <h1 class="main-heading">
+                الدروس
+              </h1>
+
+              <% if(lessons.length> 0 ){ %>
+                <ul class="cards">
+                  <input type="hidden" name="student" value="<%= user._id%>" id="">
+                  <% lessons.forEach(e=>{ %>
+
+                    <a class="card" href="/lesson/<%=e._id%>">
+
+                      <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                      <div class="card-body">
+                        <img class="card-img" src="/images/examIcon.png%>" alt="" srcset="">
+                        <h2>
+                          <%= e.name %>
+                        </h2>
+
+                      </div>
+                    </a>
+
+                    <% }) %>
+                </ul>
+                <% }else{ %>
+                  <p class="alert ">لم يوجد دروس بعد</p>
+                  <%}%>
+            </div>
+            <div class="none" data-tab-content="content-two">
+              <h1 class="main-heading">
+                الاختبارات السابقه
+              </h1>
+              <% if(exams.length> 0 || homeworks.length > 0){ %>
+                <ul class="cards">
+                  <input type="hidden" name="student" value="<%= user._id%>" id="">
+                  <% exams.forEach(e=>{ %>
+                    <a class="card " href="/exam/<%=e._id%>/preview">
+                      <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                      <div class="card-body">
+                        <img class="card-img" src="/images/examIcon.png%>" alt="" srcset="">
+                        <h2>
+                          اسم الامتحان: <%= e.name %>
+                        </h2>
+                      </div>
+                    </a>
+
+                    <% }) %>
+                  <% homeworks.forEach(e=>{ %>
+                    <a class="card " href="/exam/<%=e._id%>/preview">
+                      <input type="hidden" name="examId" value="<%= e._id%>" id="">
+                      <div class="card-body">
+                        <img class="card-img" src="/images/examIcon.png%>" alt="" srcset="">
+                        <h2>
+                          اسم الواجب: <%= e.name %>
+                        </h2>
+                      </div>
+                    </a>
+
+                    <% }) %>
+                </ul>
+                <% }else{ %>
+                  <p class="alert ">لم تختبر نفسك بعد</p>
+                  <%}%>
+
+
+            </div>
+            <%- include('../includes/message.ejs') %>
+
+              <%- include('./includes/info-forms.ejs') %>
+
+          </div>
+        </div>
+
+    </div>
+
+
+
+
+    <%- include('../includes/end.ejs') %>
+
+</body>
+
+</html>

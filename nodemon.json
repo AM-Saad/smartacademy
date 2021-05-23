@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "abdelrhman",
+        "MONGO_PASSWORD": "ingodwetrust",
+        "DATABASE_URL": "eTest",
+        "TWILIO_ACCOUNT_SID": "ACfe3ce9208b84c5aa99c8edc3e1fb6ec9",
+        "TWILIO_AUTH_TOKEN": "35f4e0bb8a7c44d444818fa7bbe8f123",
+        "NODE_ENV": "production"
+    }
+}

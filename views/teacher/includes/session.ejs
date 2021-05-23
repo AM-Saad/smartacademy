@@ -1,0 +1,52 @@
+<div class="content-six none" data-tab-content="content-six">
+    <div class="flex f-space-between p-4">
+        <h2>الحصص</h2>
+        <% if (user.isTeacher || user.isAssistent){ %>
+        <button class="btn btn-success toggle-session-form addLesson" data-form="newsession">حصه جديده</button>
+        <%}%>
+    </div>
+    <% if (user.isTeacher || user.isAssistent){ %>
+        <div class="fileForm none" id="newsession">
+            <i class="fas fa-times close c-w" data-form="newsession"></i>
+            <div id="UploadBox">
+                <h2 class="p-large"> حصه زووم</h2>
+
+                <div class="item_inputs_group video-title">
+                    <label for="">العنوان:</label>
+                    <input class="item_inputs_control form-control" type="text" id="sessionTitle" required>
+                </div>
+                <div class="item_inputs_group video-title">
+                    <label for="">الرابط:</label>
+                    <input class="item_inputs_control form-control" type="text" id="sessionUrl" required>
+                </div>
+
+                <button type='button' id='UploadsessionButton' class='Button btn btn-success'>تأكيد</button>
+                <button type='button' id='cancelsessionButton' class='Button btn btn-warning none'>الغاء</button>
+            </div>
+
+        </div>
+        <%}%>
+
+        <% if(lesson.live_sessions.length > 0 ){ %>
+        <div class="cards">
+
+            <% lesson.live_sessions.forEach(v =>{ %>
+            <div class="card ">
+                <input type="hidden" name="examId" value="<%= lesson._id%>" id="">
+                <img src="/images/videoIcon.jpg" class="card-img" alt="...">
+                <h2 class="card-title text-m">
+                    <%= v.title %>
+                </h2>
+                <div class="card-action">
+                    <a class="btn btn-danger"
+                        href="/teacher/sessions/delete/<%= lesson._id %>?session=<%= v._id %>">حذف</a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <% }else{ %>
+        <%- include('../includes/fall-back.ejs') %>
+
+        <% } %>
+
+    </div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/assistent.css" />
+        <link rel="stylesheet" href="/css/general/student_profile.css" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="/css/teacherPanel.css">
+
+        <title>
+            <%= pageTitle%>
+        </title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <%- include('../includes/nav.ejs') %>
+            <% if(sucMessage){ %>
+                <div class="alert alert-success">
+                    <%= sucMessage %>
+                </div>
+                <%}%>
+                    <% if(errMessage){ %>
+                        <div class="alert alert-warning">
+                            <%= errMessage %>
+                        </div>
+                        <%}%>
+                            <div class="filters" id="filterStudents" style="display: block; opacity: 1;">
+                                <form id="filter-students-grade" action="">
+                                    <div class="form-check filter-grade-students form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sgrade" id="sGrade1" value="1">
+                                        <label class="form-check-label" for="sGrade1">Grade: 1</label>
+                                    </div>
+                                    <div class="form-check filter-grade-students form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sgrade" id="sGrade2" value="2">
+                                        <label class="form-check-label" for="sGrade2">Grade: 2</label>
+                                    </div>
+
+                                    <div class="form-check filter-grade-students form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sgrade" id="sGrade3" value="3">
+                                        <label class="form-check-label" for="sGrade3">Grade: 3</label>
+                                    </div>
+                                </form>
+                                <div>
+                                    <form id="filter-students-centers" action="">
+                                        <input type="hidden" name="teacherId" value="<%=teacherId%>">
+                                        <%teacher.centers.forEach(c =>{ %>
+                                            <div class="form-check filter-center-students form-check-inline">
+                                                <input class="form-check-input" type="radio" name="center" id="<%=c.center%>" value="<%=c.center%>">
+                                                <label class="form-check-label" for="<%=c.center%>">
+                                                    <%=c.center%>
+                                                </label>
+                                            </div>
+                                            <%})%>
+                                    </form>
+                                    <form id="filter-students-grade-centers" action="">
+                                        <div class="form-check filter-grade-centers-students form-check-inline">
+                                            <input class="form-check-input" type="radio" name="scgrade" id="sCGrade1" value="1">
+                                            <label class="form-check-label" for="sCGrade1">Grade: 1</label>
+                                        </div>
+                                        <div class="form-check filter-grade-centers-students form-check-inline">
+                                            <input class="form-check-input" type="radio" name="scgrade" id="sCGrade2" value="2">
+                                            <label class="form-check-label" for="sCGrade2">Grade: 2</label>
+                                        </div>
+
+                                        <div class="form-check filter-grade-centers-students form-check-inline">
+                                            <input class="form-check-input" type="radio" name="scgrade" id="sCGrade3" value="3">
+                                            <label class="form-check-label" for="sCGrade3">Grade: 3</label>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="search-student-number" class="form-group">
+                                    <input class="form-control" type="text" name="sNumber" id="sNumber" placeholder="By Number">
+                                    <button id="searchNumberBtn" class="btn btn-sm btn-info">Search</button>
+                                </div>
+                            </div>
+                            <div id="quickLook" class="none"> </div>
+                            <div id="students">
+                                <input type="hidden" name="teacherId" value="<%=teacherId%>">
+                            </div>
+
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+        <script src="/js/main.js"></script>
+        <script src="/js/teacher/components/profile-layout.js"></script>
+        <script src="/js/helpers/message.js"></script>
+        <script src="/js/helpers/request.js"></script>
+        <script src="/js/teacher/students.js"></script>
+
+</body>
+
+</html>

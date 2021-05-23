@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- <link rel="stylesheet" href="/css/units.css" /> -->
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <div id="single-unit" class="rounded p-3">
+
+            <div class="lessons" style="padding: 5px;">
+                <div class="flex f-space-between">
+                    <a href="/teacher/units">
+                        <h2 class="main-heading">Mr <%=teacher.name %> Lessons</h2>
+                    </a>
+                </div>
+                <% if(lessons.length > 0){ %>
+                <div class="cards ">
+                    <% lessons.forEach(l =>{ %>
+                    <div class="card">
+                        <div>
+                            <h2>اسم الدرس <%=l.name %></h2>
+                        </div>
+                        <div >
+                            <h3>عدد الطلاب <%=l.students.length %></h3>
+                        </div>
+
+                    </div>
+                    <% }) %>
+                </div>
+                <% }else{ %>
+                <h2 style="color: #888; padding: var(--main-padding)">No Lessons Yet!!.</h2>
+                <% } %>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+    <script src="/js/helpers/message.js"></script>
+    <script src="/js/helpers/request.js"></script>
+    <script src="/js/helpers/editForms.js"></script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/unit.js"></script>
+    <script>
+        function displayEditedUnitImage(e) {
+            console.log(e)
+            let photo = e.target.files[0];  // file from input
+            if (e.target.files && e.target.files[0]) {
+                var reader = new FileReader();
+                const tumbnialImage = $(e.target).siblings('.thum-img')
+                reader.onload = function (e) {
+                    tumbnialImage.attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+                tumbnialImage.removeClass('none')
+            }
+        }
+    </script>
+
+</body>
+
+</html>

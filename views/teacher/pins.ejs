@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="/css/ownerpanel.css" />
+
+        <title>
+            <%= pageTitle %>
+        </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+        <div class="wrapper">
+            <div class="flex f-space-between">
+                <h1 class="main-heading">الاكواد</h1>
+                <button class="btn btn-success" onclick="openForm()"> اطبع اكواد </button>
+            </div>
+
+            <% if(errMessage) { %>
+                <div class="alert alert-warning">
+                    <%= errMessage %>
+                </div>
+                <% } %>
+                    <% if(sucMessage) { %>
+                        <div class="alert alert-success">
+                            <%= sucMessage %>
+                        </div>
+                        <% } %>
+                            <div id="teachers-panel">
+                                <div class="teachers-panel_nav">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <a class="list-group-item list-group-item-action active" id="list-teachers-list"
+                                            data-toggle="list" href="#list-teachers" role="tab"
+                                            aria-controls="teachers">جميع الاكواد</a>
+                                        <a class="list-group-item list-group-item-action" id="list-addTeacher-list"
+                                            data-toggle="list" href="#list-addTeacher" role="tab"
+                                            aria-controls="addTeacher">انشئ اكواد</a>
+                                    </div>
+                                </div>
+                                <div class="teachers-panel_content">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="list-teachers" role="tabpanel"
+                                            aria-labelledby="list-teachers-list">
+                                            <div class="flex f-space-between p-3">
+                                                <h6>عدد الاكواد: <%= numPins %>
+                                                </h6>
+                                                <h6>:عدد الاكواد المطبوعه <%= printed %>
+                                                </h6>
+                                            </div>
+                                            <% if(pins.length> 0 ){ %>
+                                                <ul class="list-group p-medium bg-darkgray">
+                                                    <% pins.forEach(p=> { %>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center m-b-3">
+                                                            <div class="flex">
+                                                                <% if(p.printed) { %>
+                                                                    <a class="m-r-3 m-l-3">
+                                                                        <i class="text-success fas fa-print"></i>
+                                                                    </a>
+                                                                    <%}%>
+                                                                        <span class="m-r-3 m-l-3">
+                                                                            <%= p.pin %>
+                                                                        </span>
+                                                            </div>
+
+                                                            <a href="/teacher/pins/delete/<%= p._id %>">
+                                                                <i class="text-danger fas fa-times"></i>
+                                                            </a>
+
+                                                        </li>
+                                                        <% }) %>
+                                                </ul>
+                                                <% } else { %>
+                                                    <p class="lead">لا يوجد اكواد</p>
+                                                    <% } %>
+                                                        <section id="pagination" class="flex bg-darkgray">
+                                                            <% if(currentPage !==1 && prevPage !==1) { %>
+                                                                <a href="?page=1" class="btn">1</a>
+                                                                <% } %>
+                                                                    <% if(hasPrevPage) { %>
+                                                                        <a href="?page=<%= prevPage %>"
+                                                                            class="btn btn-success">
+                                                                            <%= prevPage %>
+                                                                        </a>
+                                                                        <% } %>
+                                                                            <a href="?page=<%= currentPage %>"
+                                                                                class="btn active">
+                                                                                <%= currentPage %>
+                                                                            </a>
+                                                                            <% if(hasNextPage) { %>
+                                                                                <a href="?page=<%= nextPage %>"
+                                                                                    class="btn btn-success">
+                                                                                    <%= nextPage %>
+                                                                                </a>
+                                                                                <% } %>
+                                                                                    <% if(lastPage !==currentPage &&
+                                                                                        nextPage !==lastPage) { %>
+
+                                                                                        ...
+                                                                                        <a href="?page=<%= lastPage %>"
+                                                                                            class="btn">اخر صفحه</a>
+                                                                                        <% } %>
+                                                        </section>
+                                        </div>
+                                        <div class="tab-pane fade m-large" id="list-addTeacher" role="tabpanel"
+                                            aria-labelledby="list-addTeacher-list">
+                                            <form action="/teacher/pins" method="post" class="flex">
+                                                <input type="number" name="pinsLength" value="" id=""
+                                                    class="form-control" placeholder="عدد الاكواد التي تريد انشأها"
+                                                    max="100" min="0">
+                                                <button type="submit" class="btn btn-success">انشئ</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="external-box w-50 bg-darkgray none">
+                                    <i class="fas fa-times close" onclick="closeForm()"></i>
+                                    <form method="get" action="/teacher/pins/print" style="  text-align: right;   ">
+                                        <label for="pins">عدد الاكواد:</label>
+                                        <div class="flex">
+                                            <input type="number" class="form-control" name="reqpins" id="pins" required>
+                                            <button class="btn btn-success">احصل</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+        </div>
+
+        <%- include('../includes/end.ejs') %>
+            <script src="/js/admin/components/pins.js"></script>
+            <script src="/js/admin/pins.js"></script>
+
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>

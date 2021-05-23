@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <h1 class="main-heading">
+            مدرسين <%=subject%>
+        </h1>
+        <%if(teachers.length > 0){ %>
+        <ul class="cards">
+            <% teachers.forEach(t => { %>
+            <a class="card" href="/teachers/<%=t._id%>">
+                <div class="card_body">
+                    <img class="card-img" src="/<%=t.image? t.image : images/teacher.png%>" alt="" srcset="">
+                    <div>
+                        <h2> <%=t.name%> </h2>
+                        <p> <%=t.bio%> </p>
+                    </div>
+                    <div class="card-actions f-space-between">
+                        <!-- <div class="flex ">
+                            <img style="width: 30px; margin-left:5px" src="/images/students_membets.png" alt="">
+                            <p> الطلاب <%=t.students.length%></p>
+                        </div> -->
+                        <!-- <div class="flex">
+                            <img style="width: 30px; margin-left:5px"
+                            src="https://cdn2.iconfinder.com/data/icons/hexagone-business-and-finance-set-1/198/31-512.png"
+                            alt="">
+                            <p> التقييم: <%=t.stars.length%></p>
+                        </div> -->
+                    </div>
+                </div>
+            </a>
+
+            <%})%>
+        </ul>
+
+        <%} else { %>
+        <div class="content-fallback">
+            <img src="https://www.clipartmax.com/png/full/37-373467_student-teacher-teacher-png.png" alt="">
+            <h1 style="margin: 10px 0;">انتظرونا قريبا جدا</h1>
+        </div>
+        <%}%>
+    </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+
+
+</body>
+
+</html>

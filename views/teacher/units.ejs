@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <link rel="stylesheet" href="/css/units.css" /> -->
+    <%- include('../includes/head.ejs') %>
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <div class="flex f-space-between m-b-3 m-t-3">
+            <h1 class="main-heading">جميع الوحدات</h1>
+            <a class="btn btn-success" href="/teacher/units/new">وحده جديده</a>
+        </div>
+        <div class="filters">
+            <form action="">
+                <div class="form-check filter-classroom-item form-check-inline">
+                    <input class="form-check-input" type="radio" name="grade" id="all" value="all" checked>
+                    <label class="form-check-label" for="all">الجميع</label>
+                </div>
+                <% user.classes.forEach(e =>{ %>
+
+                <div class="form-check filter-classroom-item form-check-inline">
+                    <input class="form-check-input" type="radio" name="grade" id="<%=e.en%>" value="<%=e.en%>">
+                    <label class="form-check-label" for="<%=e.en%>"><%=e.ar%></label>
+                </div>
+                <%})%>
+
+            </form>
+
+            <form id="filter-term" action="">
+                <div class="form-check filter-term-item form-check-inline">
+                    <input class="form-check-input" type="radio" name="term" id="term1" value="1">
+                    <label class="form-check-label" for="term1">تيرم اول</label>
+                </div>
+                <div class="form-check filter-term-item form-check-inline">
+                    <input class="form-check-input" type="radio" name="term" id="term2" value="2">
+                    <label class="form-check-label" for="term2">تيرم ثاني</label>
+                </div>
+
+            </form>
+            <!-- <div id="filter-term" action="">
+                <div class=" filter-term-item form-check-inline">
+                    <input class="form-control search-name" type="text" name="searchname" id=""
+                        placeholder="ابحث في الوحدات">
+                </div>
+            </div> -->
+        </div>
+        <%- include('../includes/message.ejs') %>
+
+        <% if(units.length > 0){ %>
+        <div class="cards">
+            <% units.forEach(u =>{ %>
+            <div class="card" data-classroom="<%=u.unitInfo.classroom%>" data-term="<%=u.unitInfo.term%>">
+                <a href="/teacher/units/<%=u._id%>">
+                    <div class="card-body grid">
+                        <img src="/<%=u.unitDetails.image ? u.unitDetails.image : 'images/unitImage.jpg'%>"
+                            class="card-img">
+                        <h2><%=u.unitDetails.name%></h2>
+                    </div>
+                    <div class="card-actions">
+                        <a class="btn-main " href="/teacher/units/<%=u._id%>/edit">تعديل</a>
+                        <a class="btn-main bg-red deleteLesson" href="/teacher/units/<%=u._id%>/delete/">حذف</a>
+                    </div>
+                </a>
+
+            </div>
+            <% }) %>
+        </div>
+        <% }else{ %>
+        <%- include('./includes/fall-back.ejs') %>
+
+        <% } %>
+    </div>
+
+
+    <%- include('../includes/end.ejs') %>
+    <script src="/js/teacher/filter-units.js"></script>
+
+</body>
+
+</html>

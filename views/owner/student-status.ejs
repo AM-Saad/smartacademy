@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/ownerpanel.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
+        <!-- integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+
+
+
+        <div id="students-panel">
+            <img src="/images/loading(3).svg" class="mainloading loading" alt="">
+            <div class="students-panel_head">
+                <div id="searchStudentForm" class="input-group">
+                    <div class="searchStudentForm_wrapper">
+
+                        <img src="/images/loading(3).svg" style="width: 25px; height: 25px;" class="loading none" alt="">
+
+                        <input style="border: 0;" placeholder="Write Student Number" id="searchStudent" type="number"
+                            name="number" class="form-control" aria-label="Text input with dropdown button">
+                    </div>
+                    <button id="searchStudentBtn" onclick="searchstudent(this)" class="btn bg-success">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="searchResult" style="z-index: 9999;">
+                        <i class="fas fa-times closeSearch"></i>
+                    </div>
+                </div>
+                <div class="flex f-space-between">
+
+                    <a onclick="activateAllStudent(this)" class="btn btn-info">Active All Student</a>
+                    <a onclick="deactivateAllStudent(this)" class="btn btn-danger">Deactive All Student</a>
+                </div>
+            </div>
+            <%if(students.length > 0){ %>
+            <ul class="student-panel_students-list list-group">
+                <% students.forEach(student =>{ %>
+
+                <li class="list-group-item align-items-center p-relative">
+                    <input type="hidden" name="studentId" value="<%=student._id%>" id="">
+                    <a href="/owner/student/<%=student._id %>">
+                        <%= student.name %>
+                    </a>
+                    <span class="badge badge-primary badge-pill">Taken Exams:
+                        <%= student.exams.length%>
+                    </span>
+                    <span class="badge badge-danger badge-pill close font-s">
+                        <a href="/owner/deleteStudnet/<%=student._id%>" class="deleteStudent">
+                            <i class="fas fa-trash text-white"></i>
+                        </a>
+                    </span>
+                    <div class="teachers">
+                        <i class="fas fa-times closeTeachers"></i>
+                        <img src="/images/loading(3).svg" class="loading loading-small" alt="">
+
+                    </div>
+                    <div class="flex f-space-between">
+
+                        <a onclick="getStudentTeachers(this)" class="btn  btn-info font-s"> Teachers</a>
+                        <a href="/owner/resetPassword/<%=student._id%>" class="btn  btn-info font-s">Reset Password</a>
+                    </div>
+
+                </li>
+                <% }) %>
+            </ul>
+            <% } %>
+        </div>
+        <section id="pagination">
+            <% if(currentPage !== 1 && prevPage !== 1) { %>
+            <a href="?page=1" class="btn">1</a>
+            <% } %>
+            <% if(hasPrevPage) { %>
+            <a href="?page=<%= prevPage %>" class="btn">
+                <%= prevPage %>
+            </a>
+            <% } %>
+            <a href="?page=<%= currentPage %>" class="btn active">
+                <%= currentPage %>
+            </a>
+            <% if(hasNextPage) { %>
+            <a href="?page=<%= nextPage %>" class="btn">
+                <%= nextPage %>
+            </a>
+            <% } %>
+            <% if(lastPage !== currentPage && nextPage !== lastPage) { %>
+
+            ...
+            <a href="?page=<%= lastPage %>" class="btn">Last Page</a>
+            <% } %>
+        </section>
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+    <script src="/js/helpers/request.js"></script>
+    <script src="/js/helpers/message.js"></script>
+    <script src="/js/owner/components.js"></script>
+    <script src="/js/owner/students.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/teacher/new-item.css">
+
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <% if(editing) { %>
+        <h1 class="main-heading">تعديل الوحده</h1>
+        <%}%>
+        <% if(!editing) { %>
+        <h1 class="main-heading">وحده جديده</h1>
+        <%}%>
+
+        <div>
+            <%- include('../includes/message.ejs') %>
+
+    </div>
+    <div id="addLesson">
+        <form action="<% if (editing) { %>/teacher/units/<%=unit._id%>/edit<% }else {%>/teacher/units <%}%>" id="addLessonform" method="POST" enctype="multipart/form-data">
+
+            <div class="img-input-container">
+                <img src="/<% if (editing){ %><%=unit.unitDetails.image%><%}else{%>images/unitImage.jpg<%}%>" class="" alt="Uploaded file"
+            id="uploadImg" width="100">
+            <label class="label" for="image">Please upload a picture !</label>
+            <div class="input">
+                <input name="image" id="file" type="file">
+            </div>
+    </div>
+    <p>
+
+        </p>
+    <div class=" form-group">
+            <label for="classroom">الصف الدراسي</label>
+
+            <%if(editing) { %>
+            <select name="classroom" id="classroom" autocapitalize="off" required="required" class="form-control"
+            required>
+            <% user.classes.forEach(c => { %>
+            <%if(c.en !== unit.unitInfo.classroom) { %>
+            <option value="<%=c.en%>"><%= c.ar %></option>
+            <%}else{ %>
+            <option value="<%=unit.unitInfo.classroom%>" selected="selected"><%= c.ar %> </option>
+            <%}%>
+                <%})%>
+            </select>
+            <%}%>
+
+            <%if(!editing) { %>
+            <select name="classroom" id="classroom" autocapitalize="off" required="required" class="form-control"
+                required>
+                <option selected disabled>اختار الصف</option>
+                <% user.classes.forEach(c => { %>
+                <option value="<%=c.en%>"><%= c.ar %></option>
+                <%})%>
+            </select>
+            <%}%>
+
+     
+    </div>
+    <div class=" form-group">
+        <label for="term">اختار الترم</label>
+        <%if(!editing) { %>
+            <select class="form-control" name="term" id="term">
+                <option name="1" value="1">الاول</option>
+                <option name="2" value="2">الثاني</option>
+            </select>
+            <%}%>
+        <%if(editing) { %>
+            <select class="form-control" name="term" id="term">
+                <%if(unit.unitInfo.term == 1) { %>
+                <option name="1" value="1" selected>الاول</option>
+                <option name="2" value="2">الثاني</option>
+                <%}%>
+                <%if(unit.unitInfo.term == 2) { %>
+                <option name="1" value="1" >الاول</option>
+                <option name="2" value="2" selected>الثاني</option>
+                <%}%>
+            </select>
+            <%}%>
+
+    </div>
+    <div class="form-group">
+        <label for="unitname">اسم الوحده</label>
+        <input class="form-control" type="text" name="unitName" placeholder="اسم الوحده" id="unitname"
+            value="<% if (hasError || editing) { %><%= unit.unitDetails.name %><% } %>" />
+    </div>
+    <div class="form-group">
+        <label for="unitNo">رقم الوحده</label>
+        <input class="form-control" type="number" min="1" name="unitNo" id="unitNo"
+            value="<% if (hasError || editing) { %><%= unit.unitDetails.number %><% } %>" placeholder="رقم الوحده"
+            id="">
+    </div>
+
+
+    <div class="form-group">
+
+        <button type="submit" class="btn-main">
+            حفظ
+        </button>
+    </div>
+
+    </form>
+
+    </div>
+
+    </div>
+    <%- include('../includes/end.ejs') %>
+</body>
+
+</html>

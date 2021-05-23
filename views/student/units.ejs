@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+        <input type="hidden" name="studentIdNotifi" value="<%=user._id%>">
+        <h1 class="main-heading">
+            جميع الوحدات
+        </h1>
+        
+        <% if(units.length > 0){ %>
+
+        <div id="teacher-units" class="cards">
+            <% units.forEach(u => { %>
+            <a class="card p-2" href="/teachers/units/unit/<%=u._id%>">
+                <div class="card-body">
+                    <img src="/<%=u.unitDetails.image?u.unitDetails.image:'/images/unitImage.jpg' %>" class="card-img">
+                    <h2>
+                        <%= u.unitDetails.name %>
+                    </h2>
+                </div>
+            </a>
+            <% }) %>
+
+        </div>
+        <% }else{ %>
+            <%- include('./includes/fall-back.ejs') %>
+
+        <% } %>
+
+    </div>
+
+
+    <%- include('../includes/end.ejs') %>
+
+
+</body>
+
+</html>

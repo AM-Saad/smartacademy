@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/teacher/teacherPanel.css">
+
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+
+        <%- include('../includes/message.ejs') %>
+
+        <h1 class="main-heading">اعدادات الحساب</h1>
+
+        <div class="dynamic-tabs">
+            <div id="list-settings">
+                <form action="/teacher/settings/info" method="post" enctype="multipart/form-data"
+                    class="p-large shadow bg-w">
+                    <h2>البيانات الشخصيه</h2>
+                    <input type="hidden" name="teacherId" value="<%=userId%>">
+                    <div>
+                        <div class="img-input-container">
+                            <img src="/<%=user.image ? user.image : 'images/user.png'%>" class="" alt="Uploaded file"
+                                id="uploadImg" width="100">
+                            <label class="label" for="image">Please upload a picture !</label>
+                            <div class="input">
+                                <input name="image" id="file" type="file">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">مقدمه عنك</label>
+                            <input type="text" class="form-control" placeholder="ادخل مقدمه عنك" name="updatedBio"
+                                value="<%=teacher.bio%>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">اسمك</label>
+                            <input type="text" class="form-control" placeholder="ادخل اسمك" name="updatedName"
+                                value="<%=teacher.name%>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">رقم الموبايل</label>
+                            <input type="text" class="form-control" placeholder="ادخل رقم الموبايل" name="updatedMobile"
+                                value="<%=teacher.mobile%>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">المحافظه</label>
+                            <input type="text" class="form-control" placeholder="ادخل محافظتك" name="updatedGovernorate"
+                                value="<%=teacher.governorate%>" />
+                        </div>
+
+
+                    </div>
+
+                    <button class="btn btn-success right">تعديل</button>
+                </form>
+                <form style="margin: var(--m-margin) 0" action="/teacher/settings/password" method="POST"
+                    class="p-large shadow bg-w">
+                    <h2>تغيير رقم المرور</h2>
+
+                    <input type="hidden" name="teacherId" value="<%=userId%>">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">رقم المرور الحالي</label>
+                        <input type="password" class="form-control" placeholder="رقم المرور الحالي"
+                            name="oldPassword" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">رقم المرور الجديد</label>
+                        <input type="password" class="form-control" placeholder="رقم المرور الجديد"
+                            name="newPassword" />
+                    </div>
+                    <button class="btn btn-success">تغيير</button>
+
+                </form>
+                <form style="margin: var(--m-margin) 0" action="/teacher/settings/social" method="POST"
+                    class="p-large shadow bg-w">
+                    <h2> وسائل التواصل الاجتماعي</h2>
+
+                    <input type="hidden" name="teacherId" value="<%=userId%>">
+                    <div class="form-group">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" class="form-control" placeholder="اضف رابط الفيسبوك"
+                            value="<%=teacher.social.facebook%>" id="facebook" name="facebook" />
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" class="form-control" placeholder="اضف رابط تويتر" value="<%=teacher.social.twitter%>" id="twitter"
+                            name="twitter" />
+                    </div>
+                    <div class="form-group">
+                        <label for="youtube">Youtube</label>
+                        <input type="text" class="form-control" placeholder="اضف رابط يوتيوب" value="<%=teacher.social.youtube%>" id="youtube"
+                            name="youtube" />
+                    </div>
+
+                    <button class="btn btn-success">تغيير</button>
+
+                </form>
+                <div class="form-group p-large shadow bg-w" id="addCenter">
+                    <form action="" class="form-group">
+                        <input type="text" class="form-control d-inline" name="newCenter"
+                            placeholder="ضف مجموعه/سنتر جديد">
+                        <a id="addNewCenter" class=" btn btn-sm btn-info d-inline">Add</a>
+                    </form>
+                    <ul class="centers list-group">
+                        <%if(teacher.centers.length > 0){ %>
+                        <%teacher.centers.forEach(c =>{ %>
+                        <li class="list-group-item">
+                            <%=c%>
+                            <input type="hidden" name="centerName" value="<%=c%>">
+                            <button class="deleteCenter btn btn-sm btn-danger float-right">Delete</button>
+                        </li>
+                        <% }) %>
+                        <%}else{ %>
+                        <p class="alert">لا يوجد مجموعات لديك</p>
+                        <%} %>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+
+
+    <script src="/js/teacher/centers.js"></script>
+
+
+</body>
+
+</html>

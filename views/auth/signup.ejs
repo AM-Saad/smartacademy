@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="zxx">
+
+<head>
+  <%- include('../includes/head.ejs') %>
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+  <title> <%= pageTitle %></title>
+  <!-- CSS here -->
+
+</head>
+
+<body>
+  <%- include('../includes/nav.ejs') %>
+
+
+  <div class="wrapper " id="signup_page">
+    <% if( path === '/signup') { %>
+    <div id="form-container" class="block">
+
+      <div class="head">
+        <h1>أنشئ حساب جديد</h1>
+        <img src="/images/signup.png" alt="">
+      </div>
+
+      <div class="flex f-space-around choose_type">
+        <button class="signup_btn btn btn-big bg-main " data-form="student">طالب</button>
+        <button class="signup_btn btn btn-big bg-main" data-form="teacher">مدرس</button>
+      </div>
+
+      <div class="auth none student">
+        <form action="/signup" method="post" 
+          onsubmit="event.preventDefault(); registerStudent(event)">
+          <h2>ادخل بياناتك</h2>
+          <i class="fas fa-times close p-3 font-l toggle-form" data-form="student"></i>
+          <div class="form-group">
+            <label for="name">اسمك</label>
+            <input type="text" name="name" id="name" placeholder="اكتب اسمك"
+              value="<% if (hasError) { %><%= oldInputs.name %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="mobile">رقم الموبيل </label>
+            <input type="text" name="mobile" id="mobile" placeholder="رقم الموبايل"
+              value="<% if (hasError) { %><%= oldInputs.mobile %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="Password">الرقم السري</label>
+            <input type="password" name="password" id="Password" placeholder="اكتب الرقم السري"
+              value="<% if (hasError) { %><%= oldInputs.password %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmpassword">تأكيد الرقم السري</label>
+            <input type="password" name="confirmpassword" id="confirmpassword" placeholder="اعد كتابه الرقم السري"
+              value="<% if (hasError) { %><%= oldInputs.confirmpassword %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="classroom">اختر الصف</label>
+            <select name="classroom" id="classroom" required>
+              <option value="<% if (hasError) { %><%= oldInputs.classroom %><% } %>">
+              </option>
+              <option value="firstgradesecondary">الاول الثانوى</option>
+              <option value="secondgradesecondary">الثانى الثانوى</option>
+              <option value="thirdgradesecondary">الثالث الثانوى</option>
+              <option value="firstpreparatorygrade">الاول الاعدادى</option>
+              <option value="secondpreparatorygrade">الثانى الاعدادى</option>
+              <option value="thirdpreparatorygrade">الثالث الاعدادى</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="governorate">المحافظه</label>
+
+            <select class="form-control" id="governorate" name="governorate" id="governorate">
+              <option selected="selected">الغربية</option>
+              <option value="الإسكندرية">الإسكندرية</option>
+              <option value="الإسماعيلية">الإسماعيلية</option>
+              <option value="كفر الشيخ">كفر الشيخ</option>
+              <option value="أسوان">أسوان</option>
+              <option class="أسيوط">أسيوط</option>
+              <option class="الأقصر">الأقصر</option>
+              <option class="الوادي الجديد">الوادي الجديد</option>
+              <option value="شمال سيناء">شمال سيناء</option>
+              <option value="البحيرة">البحيرة</option>
+              <option value="بني سويف">بني سويف</option>
+              <option value="بورسعيد">بورسعيد</option>
+              <option value="البحر الأحمر">البحر الأحمر</option>
+              <option value="الجيزة">الجيزة</option>
+              <option value="الدقهلية">الدقهلية</option>
+              <option value="جنوب سيناء">جنوب سيناء</option>
+              <option value="دمياط">دمياط</option>
+              <option value="سوهاج">سوهاج</option>
+              <option value="السويس">السويس</option>
+              <option value="الشرقية">الشرقية</option>
+              <option value="الغربية">الغربية</option>
+              <option value="الفيوم">الفيوم</option>
+              <option value="القاهرة">القاهرة</option>
+              <option value="القليوبية">القليوبية</option>
+              <option value="قنا">قنا</option>
+              <option value="مطروح">مطروح</option>
+              <option value="المنوفية">المنوفية</option>
+              <option value="المنيا">المنيا</option>
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="school">المدرسه</label>
+            <input type="text" name="school" id="school" placeholder="اسم مدرستك"
+              value="<% if (hasError) { %><%= oldInputs.governorate %><% } %>" required />
+          </div>
+          <button type="submit" id="sign-up" class="btn btn-success">اشترك</button>
+          <p>لديك حساب بالفعل
+            <a href="/login">تسجيل الدخول</a>
+          </p>
+        </form>
+
+
+      </div>
+      <div class="auth teacher none" >
+        <form onsubmit="event.preventDefault(); registerTeacher(event)">
+          <i class="fas fa-times close p-3 font-l toggle-form" data-form="teacher"></i>
+
+          <h2>ادخل بياناتك</h2>
+          <div class="form-group">
+            <label for="teachername">اسم المدرس</label>
+            <input type="text" name="teachername" id="teachername" placeholder="اسمك بالكامل"
+              value="<% if (hasError) { %><%= oldInputs.name %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="teachermobile">رقم الموبيل</label>
+            <input type="text" name="teachermobile" id="teachermobile" placeholder="رقم الموبيل"
+              value="<% if (hasError) { %><%= oldInputs.mobile %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="teacherpassword">رقم المرور</label>
+            <input type="password" name="teacherpassword" id="teacherpassword" placeholder="رقم المرور"
+              value="<% if (hasError) { %><%= oldInputs.password %><% } %>" required />
+          </div>
+          <div class="form-group">
+            <label for="teacherconfirmpassword">تأكيد رقم المرور</label>
+
+            <input type="password" name="teacherconfirmpassword" id="teacherconfirmpassword"
+              placeholder="اعد كتابه رقم المرور" value="<% if (hasError) { %><%= oldInputs.confirmPassword %><% } %>"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="teachersubject">الماده</label>
+            <select class="subject" name="teachersubject" id="teachersubject">
+              <option disabled>Choose Subject</option>
+              <option value="math">رياضيات</option>
+              <option value="sciences">علوم</option>
+              <option value="social studies">الدراسات الاجتماعيه</option>
+              <option value="history">التاريخ</option>
+              <option value="chemistry">الكيمياء</option>
+              <option value="physics">الفيزياء</option>
+              <option value="geologia">جيولوجيا</option>
+              <option value="biology">بيولوجي</option>
+              <option value="psychology">علم نفس</option>
+              <option value="sociology">علم اجتماع</option>
+              <option value="arabic">عربي</option>
+              <option value="english">انجليزي</option>
+              <option value="french">فرنساوي</option>
+              <option value="italy">ايطالي</option>
+              <option value="german">الماني</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>أختر الصفوف</label>
+
+            <ul class="ks-cboxtags classes_box ">
+              <li>
+                <input type="checkbox" data-ar="الاول الثانوى" value="firstgradesecondary" id="firstgradesecondary"
+                  name="class">
+                <label for="firstgradesecondary">
+                  الاول الثانوى
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" data-ar="الثانى الثانوى" value="secondgradesecondary" id="secondgradesecondary"
+                  name="class">
+                <label for="secondgradesecondary">
+                  الثانى الثانوى
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" data-ar="الثالث الثانوى" value="thirdgradesecondary" id="thirdgradesecondary"
+                  name="class">
+                <label for="thirdgradesecondary">
+
+                  الثالث الثانوى
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" data-ar="الاول الاعدادى" value="firstpreparatorygrade" id="firstpreparatorygrade"
+                  name="class">
+                <label for="firstpreparatorygrade">
+
+                  الاول الاعدادى
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" data-ar="الثانى الاعدادى" value="secondpreparatorygrade"
+                  id="secondpreparatorygrade" name="class">
+                <label for="secondpreparatorygrade">
+
+                  الثانى الاعدادى
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" data-ar="الثالث الاعدادى" value="thirdpreparatorygrade"
+                  id="thirdpreparatorygrade" name="class">
+                <label for="thirdpreparatorygrade">
+
+                  الثالث الاعدادى
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <button class="btn btn-success">اشترك</button>
+          <p>لديك حساب بالفعل
+            <a href="/login">تسجيل الدخول</a>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <%}%>
+          </div>
+    <%- include('../includes/footer.ejs') %>
+
+  <!-- JS here -->
+  <%- include('../includes/end.ejs') %>
+
+
+
+  <script src="/js/auth.js"></script>
+
+  <script>
+    $('.signup_btn').on('click', function (e) {
+      $('.auth').addClass('none').animate({ opacity: 0 })
+      $(`.${$(this).data('form')}`).removeClass('none').animate({ opacity: 1 }, 300)
+    })
+    $('.toggle-form').on('click', function (e) { $('.auth').addClass('none').animate({ opacity: 0 }, 300) })
+
+
+  </script>
+</body>
+
+</html>

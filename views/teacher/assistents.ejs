@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/teacher/teacherPanel.css">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+
+        <%- include('../includes/message.ejs') %>
+
+        <h1 class="main-heading">المشرفين</h1>
+
+
+
+        <div class="content-list">
+            <div id="list-assistents">
+                <h3 style="margin: 0">جميع المشرفين</h3>
+
+                <%  if(assistents.length > 0){ %>
+                <div id="assistents" class="cards">
+                    <% assistents.forEach(assistent =>{ %>
+                    <div class="card rounded p-3">
+                        <div class="card-body">
+                            <img src="/<%=assistent.assistentImage%>" alt="">
+                            <h2>
+                                <%=  assistent.name %>
+                            </h2>
+                            <span>
+                                Mobile:
+                                <%= assistent.mobile %>
+                            </span>
+                        </div>
+                        <div class="card-actions">
+                            <form action="/teacher/assistent/delete/<%= assistent._id %>" method="post">
+                                <button class="btn btn-danger mt-2" type="submit">Delete</button>
+                            </form>
+                            <% if(assistent.blocked){ %>
+                            <form action="/teacher/assistents/state/<%= assistent._id %>?state=false" method="post">
+                                <button class="btn btn-success mt-2" type="submit">الغاء الحظر</button>
+                            </form>
+                            <% } %>
+                            <% if(!assistent.blocked){ %>
+                            <form action="/teacher/assistents/state/<%= assistent._id %>?state=true" method="post">
+                                <button class="btn btn-warning mt-2" type="submit">حظر</button>
+                            </form>
+                            <% } %>
+                        </div>
+
+                    </div>
+                    <% }) %>
+                </div>
+                <% }else{ %>
+                <p class="lead">لا يوجد مشرفين  لديك</p>
+                <%} %>
+
+                <form action="/teacher/assistents" method="POST" class="p-large shadow bg-lightgray">
+                    <h3 style="margin: 0">مشرف جديد:</h3>
+
+                    <input type="hidden" name="teacherId" value="<%= userId %>">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">اسم المشرف</label>
+                        <input type="text" class="form-control" placeholder="Enter name" name="name" required
+                            value="<% if (hasError) { %><%= oldInputs.name %><% } %>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">موبايل المشرف</label>
+                        <input type="text" class="form-control" name="mobile" placeholder="Enter Your Mobile" required
+                            value="<% if (hasError) { %><%= oldInputs.mobile %><% } %>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">الرقم السري</label>
+                        <input type="password" class="form-control" placeholder="Password" name="password" required
+                            value="<% if (hasError) { %><%= oldInputs.password %><% } %>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">اعاده الرقم السري</label>
+                        <input type="password" class="form-control" name="confPassword" placeholder="Re-Password"
+                            required value="<% if (hasError) { %><%= oldInputs.confPassword %><% } %>" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">حفظ</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <%- include('../includes/end.ejs') %>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+
+#closeForm{
+  position: absolute;
+  right: 1%;
+  top: 0;
+  cursor: pointer;
+}
+
+#editInfoForm .form-group{
+  padding: var(--m-padding) 0;
+}
+#editInfoForm .form-group input{
+  background-color: transparent;
+  background-color: #fff
+}
+#editInfoForm  form{
+background: #eee;
+padding: var(--m-padding);
+box-shadow: var(--shadow2);
+margin-bottom: var(--l-margin);
+margin-top: var(--s-margin);
+}
+
+.container {
+  user-select: none;
+  /* margin: 100px auto; */
+  background: #231e39;
+  color: #b3b8cd;
+  border-radius: var(--s-radius);
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+#student {
+  background: var(--main-color);
+  color: #292343;
+}
+
+.cover-photo {
+  height: 160px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  background: #ccc;
+  background-image: url(https://images.unsplash.com/photo-1540228232483-1b64a7024923?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80);
+}
+
+#student .cover-photo {
+  /* background: url('../../images/14092.jpg'); */
+}
+
+#teacher .cover-photo {}
+
+.profile {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin: 70px 0 0 -230px;
+  border: 1px solid #1f1a32;
+  padding: 7px;
+  background: #292343;
+}
+
+#student .profile {}
+
+.profile-name {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 40px 0 0 0px;
+  color: #fff;
+}
+
+.about {
+  margin: 15px 0;
+  line-height: 21px;
+  color: #ccc;
+}
+
+button {
+  margin: 10px 0 40px 0;
+}
+
+.msg-btn, .follow-btn {
+  background: #03bfbc;
+  border: 1px solid #03bfbc;
+  padding: 10px 25px;
+  color: #231e39;
+  border-radius: 3px;
+  font-family: Montserrat, sans-serif;
+  cursor: pointer;
+}
+
+.msg-btn {
+  margin-left: 10px;
+  background: transparent;
+  color: #02899c;
+}
+
+.msg-btn:hover {
+  color: #231e39;
+  background: #03bfbc;
+  transition: .5s;
+}
+
+.container i {
+  padding-left: 20px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.container i:hover {
+  color: #03bfbc;
+}
+
+.lesson-pin input {
+  background: #eee;
+  padding: 8px;
+  margin-bottom: 4px;
+  text-align: center;
+  border-radius: var(--scnd-radius);
+}
+
+.lesson-pin input::placeholder {
+  color: #333
+}
+
+ .tabs-list {
+  margin: var(--m-margin) 0;
+  padding-bottom: var(--m-padding);
+  justify-content: center;
+}
+.tabs-list li{
+  margin: 0 var(--s-margin);
+}
+
+@media (max-width: 900px) {}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {}

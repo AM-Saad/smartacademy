@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/general/posts.css" />
+    <link rel="stylesheet" href="/css/teacher/profile.css" />
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <div class="wrapper">
+
+
+        <%- include('../includes/message.ejs') %>
+        <div class="profile-container">
+            <input type="hidden" name="teacherId" id="teacherId" value="<%=teacher._id%>">
+            <div class="cover-photo">
+                <img src="/<%=teacher.image? teacher.image : images/teacher.png%>" class="profile">
+            </div>
+            <p class="profile-name"><%=teacher.name%></p>
+            <p class="about"><%=teacher.bio%></p>
+            <div class="classes flex f-center">
+                <% teacher.classes.forEach(c => { %>
+                <div class="class">
+                    <%=c.ar%>
+                </div>
+                <%})%>
+            </div>
+            <!-- <div class="info">
+                <p class=""><%=teacher.mobile%></p>
+            </div> -->
+            <div class=" profile-action grid g-two f-space-between align-center">
+
+                <div class="flex f-center">
+                    <a href="/teachers/<%=teacher._id%>/units/" class="btn-main bg-darkgray">المنهج</a>
+                    <%if(!isTeacher){ %>
+                    <%if(!subscribed){ %>
+                    <form action="/teachers/<%=teacher._id%>/subscribe" method="post">
+                        <button class="btn-main bg-green" type="submit">اشترك</button>
+                    </form>
+                    <%}%>
+                    <%if(subscribed){ %>
+                    <form action="/teachers/<%=teacher._id%>/unsubscribe" method="post">
+                        <button class="btn-main bg-red" type="submit">الغاء الاشتراك</button>
+                    </form>
+                    <%}%>
+                <%}%>
+                </div>
+                <div>
+                    <a target="_blank" class="facebook" href="<%=teacher.social.facebook%>"> <i
+                            class="fab fa-facebook-f"></i></a>
+                    <a target="_blank" class="youtube" href="<%=teacher.social.youtube%>"><i class="fab fa-youtube"></i></a>
+                    <a target="_blank" class="twitter" href="<%=teacher.social.twitter%>"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+        
+        </div>
+
+        <div class="materials">
+            <div class="materials-actions tabs-list flex">
+                <li data-content="content-one">أحدث الاضافات</li>
+                <li data-content="content-two">اخر الاخبار</li>
+            </div>
+            <div class="materials-wrapper">
+                <div data-tab-content="content-one">
+                    <div class="flex f-space-between">
+                        <h3>احدث الاضافات</h3>
+                        <a href="/teachers/<%=teacher._id%>/units/" class="btn-main">المزيد</a>
+                    </div>
+                    <% if(units.length > 0){ %>
+                    <div id="teacher-units" class="cards">
+                        <% units.forEach(u => { %>
+                        <a class="card p-2" href="/teachers/<%=teacher._id%>/units/<%=u._id%>" >
+                            <div class="card-body">
+                                <img src="/<%=u.unitDetails.image?u.unitDetails.image:'/images/unitImage.jpg' %>"
+                                    class="card-img">
+                                <h2>
+                                    <%= u.unitDetails.name %>
+                                </h2>
+                            </div>
+                        </a>
+                        <% }) %>
+                    </div>
+                    <% }else{ %>
+                    <div class="content-fallback">
+                        <img src="/images/teacher_noresult.png" class="no_result_img" alt="">
+                        <p> انتظرونا</p>
+                    </div>
+                    <% } %>
+                </div>
+                <div data-tab-content="content-two">
+                    <h3>اخر الاخبار</h3>
+                    <%- include('../includes/posts.ejs') %>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <%- include('../includes/end.ejs') %>
+    <script src="/js/components/comments.js"></script>
+
+    <!-- <script src="/js/student/components/posts.js"></script> -->
+    <script src="/js/components/posts.js"></script>
+
+    <script src="/js/student/teacher-posts.js"></script>
+
+
+
+</body>
+
+</html>

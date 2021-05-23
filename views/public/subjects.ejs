@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/subjects.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+
+    <title>
+        <%= pageTitle%>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="wrapper">
+
+        <h1 class="main-heading ">المواد الدراسية</h1>
+
+        <ul class="cards ">
+
+            <a class="card" href="/subjects/رياضيات">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> رياضيات</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/علوم">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> علوم</h2>
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/الدراسات الاجتماعيه">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+
+                    <h2> الدراسات الاجتماعيه </h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/تاريخ">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> التاريخ</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/كيمياء">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> الكيمياء</h2>
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/فيزياء">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> الفيزياء</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/جيولوجيا">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> جيولوجيا</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/احياء">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> احياء</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/علم نفس">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> علم نفس</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/علم اجتماع">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> علم اجتماع</h2>
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/عرب">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> عربي</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/انجليزي">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> انجليزي</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/فرنساوي">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> فرنساوي</h2>
+
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/ايطالي">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> ايطالي</h2>
+                </div>
+            </a>
+
+            <a class="card" href="/subjects/الماني">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2> الماني</h2>
+                </div>
+            </a>
+            <a class="card" href="/subjects/psychology">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2>Psychology</h2>
+                </div>
+            </a>
+            <a class="card" href="/subjects/biology">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2>Biology</h2>
+                </div>
+            </a>
+            <a class="card" href="/subjects/physics">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2>Physics</h2>
+                </div>
+            </a>
+            <a class="card" href="/subjects/chemistry">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2>Chemistry</h2>
+                </div>
+            </a>
+            <a class="card" href="/subjects/Math">
+                <div class="card_body">
+                    <img class="card-img" src="/images/subjects.png" alt="" srcset="">
+                    <h2>Math</h2>
+                </div>
+            </a>
+
+
+
+        </ul>
+
+
+    </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+
+    <%- include('../includes/footer.ejs') %>
+
+</body>
+
+</html>

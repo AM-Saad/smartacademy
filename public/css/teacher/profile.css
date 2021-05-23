@@ -1,0 +1,380 @@
+.wrapper {
+  direction: rtl;
+}
+
+.btn-main {
+  margin: 0 var(--s-margin);
+}
+
+#posts-holder {
+  position: relative;
+}
+
+.posts_new-post-btn {
+  width: 100% !important;
+}
+
+.profile-container {
+  user-select: none;
+  /* margin: 100px auto; */
+  background: #fff;
+  color: #555;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  /* box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .75); */
+  border: 1px solid #ccc;
+}
+
+#student {
+  background: var(--main-color);
+  color: #292343;
+}
+
+.cover-photo {
+  height: 170px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  background-color: #eee;
+  background: url(https://images.unsplash.com/photo-1540228232483-1b64a7024923?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80);
+  position: relative;
+}
+
+#student .cover-photo {
+  background: url('../../images/14092.jpg');
+}
+
+.profile {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -70%);
+  border-radius: 50%;
+  /* margin: 70px 0 0 -230px; */
+  border: 1px solid #fff;
+  padding: 4px;
+  background: #fff;
+}
+
+#student .profile {}
+
+.profile-name {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: var(--l-margin);
+  /* margin-bottom: var(--m-margin); */
+  color: #333;
+}
+
+.info {
+  margin: 15px 0;
+  line-height: 21px;
+  font-size: 22px;
+  color: #eee;
+}
+
+.info p {
+  margin-bottom: var(--s-margin);
+}
+
+.profile-action {
+  margin-top: var(--m-margin);
+  padding: var(--s-padding) 0;
+  border-top: 1px solid;
+}
+.classes{
+  max-width: 77%;
+  overflow: scroll;
+  margin: auto;
+}
+ .class {
+  color: var(--main-color);
+  padding: var(--s-padding);
+  /* color: #000; */
+  border-radius: 50px;
+  margin: var(--m-margin);
+  background-color: #f9f9f9;
+  min-width: 140px;
+}
+
+
+.profile-container i {
+  padding-left: 20px;
+  font-size: 23px;
+  margin: var(--m-margin);
+  cursor: pointer;
+  transition: .5s;
+}
+
+.profile-container .facebook {
+  color: #1D3C78;
+}
+
+.profile-container .twitter {
+  color: #1876f2;
+}
+
+.profile-container .youtube {
+  color: red;
+}
+
+.profile-container i:hover {
+  color: #333;
+}
+
+.lesson-pin input {
+  background: #eee;
+  padding: 8px;
+  margin-bottom: 4px;
+  text-align: center;
+  border-radius: var(--scnd-radius);
+}
+
+.lesson-pin input::placeholder {
+  color: #333
+}
+
+div[data-tab-content] {
+  padding: var(--m-padding);
+  height: 80vh;
+  border-radius: var(--s-radius);
+}
+
+div[data-tab-content="content-two"] {
+  overflow: scroll;
+  background-color: #eee;
+}
+
+div[data-tab-content="content-one"] {
+  background-color: #fff;
+}
+
+#allposts {
+  display: unset;
+}
+
+#allposts .post {
+  width: 100% !important;
+  margin: var(--m-margin) 0;
+}
+
+.cards {
+  margin: 0;
+  padding: var(--s-padding);
+  background: transparent;
+}
+
+.materials-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 8px;
+  margin-top: var(--s-margin);
+}
+
+.materials-wrapper h3 {
+  font-size: 20px;
+  margin: var(--s-margin) 0;
+}
+
+.tabs-list {
+  margin: var(--l-margin) 0;
+  justify-content: center;
+  display: none;
+}
+
+.tabs-list li {
+  margin: 0 var(--m-margin);
+  list-style: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid;
+}
+
+.tabs-list li:hover {
+  border-color: var(--main-color);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 812px) {
+  .tabs-list {
+    display: flex;
+  }
+  .materials-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .class {
+    margin:var(--s-margin);
+  }
+}
+
+
+.posts_new-post-btn{
+  background:var(--main-color);
+  height: 60px;
+  width: 40%;
+  margin: var(--l-margin) auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+border-radius:var(--m-radius)
+}
+.posts_new-post-btn:hover{
+box-shadow:unset
+}
+.posts_new-post-btn_close{
+  position: absolute;
+  top: 3%;
+  left: 2%;
+  color: #000;
+  cursor: pointer
+}
+.posts_new-post-btn_close{
+color:#333;}
+.posts_new-post-box{
+  position: fixed;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 90vh;
+  width: 500px;
+  max-width: 100%;
+  background-color: #fff;
+  box-shadow: var(--shadow2);
+  border-radius: var(--s-radius);
+  padding: var(--s-padding);
+  overflow: scroll;
+  display: none;
+  opacity: 0;
+  z-index: 99999999;
+}
+
+.posts-type_btn{
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 3px;
+  border-radius: var(--m-radius);
+  box-shadow: var(--shadow2);
+background-color:#fff;
+  cursor: pointer;
+}
+.posts-type_btn:hover{
+  background-color: #65de72 !important
+}
+.posts-type_btn label{
+  cursor: pointer;
+}
+.posts-type_btn input{
+  position: absolute;
+  z-index: -1;
+}
+
+.post-content{
+  min-height: 150px;
+  width: 100%;
+  font-size: 26px;
+}
+
+.posts_new-post-box label{
+  font-size: 14px;
+  
+  padding: 2px 6px;
+}
+.posts_new-post-box-filter{
+  display: flex;
+  
+  justify-content: flex-start;
+  margin: var(--s-margin) 0;
+  max-width: 100%;
+  overflow-y: hidden;
+}
+
+.posts_new-post-box-filter div{
+  margin-right: var(--s-margin);
+}
+.posts_new-post-box-filter span{
+grid-column:1/4
+}
+.posts_new-post-box .btn-3::before {
+  font-size: 40px !important;
+}
+.posts_new-post-box .btn-3 {
+  height: 80px;
+}
+.submitpost{
+  cursor: pointer;
+  height: 50px;
+  line-height: 50px;
+  font-weight: bold;
+  color: #333;
+  font-size: 17px;
+}
+.submitpost:hover{
+opacity:.8
+}
+
+@media (max-width: 750px){
+  #holders{
+      width: 100%;
+  }
+  .posts_new-post-btn{
+      width: 90%;
+      margin: var(--l-margin) auto
+  } 
+  .posts_new-post-box{
+      
+  z-index: 99999999;
+      padding: var(--m-padding);
+      padding-top: var(--l-padding);
+      min-height: 100vh !important;
+  }
+  .teacherIntro-header h1{
+      margin: 0;
+      font-size: 1rem;
+      text-transform: capitalize;
+  }
+  .teacherIntro-header p{
+      font-size:19px;
+  }
+  .intro-holder{
+      padding: var(--m-padding);
+  }
+  .teacherIntro-header{
+      padding: var(--m-padding);
+      box-shadow: var(--shadow2);
+      border-radius: var(--s-radius);
+  }
+  .post-content{
+      max-height: 200px;
+      overflow: scroll;
+  }
+
+}
+
+@media  screen and (max-width: 850px) and (orientation: landscape) { 
+  .posts_new-post-box{
+      width: 100%;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+  .post-content{
+      min-height: 85px;
+  }
+  [type="file"] + label{
+      height: 90px;
+  }
+  [type="file"] + label.btn-3::before{
+      font-size: 30px;
+  }
+}
+
+@media  screen and (max-width: 1024px) and (orientation: landscape) { 
+
+
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="zxx">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+    <title> <%= pageTitle %></title>
+    <!-- CSS here -->
+
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <div class="wrapper">
+        <div id="form-container">
+            <div class="head">
+                <img src="/images/main.png" alt="">
+            </div>
+
+            <form action="/login" method="POST" class="auth">
+                <h1>تسجيل الدخول</h1>
+                <p>قم بتسجيل الدخول للوصول للمناهج </p>
+                <%- include('../includes/message.ejs') %>
+                <div class="form-group">
+                    <label for="mobile">رقم الموبيل</label>
+                    <input type="text" id="mobile" placeholder="ادخل رقم الموبيل" name="mobile" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">الرقم السري</label>
+                    <input type="password" id="password" placeholder="ادخل كلمه المرور" name="password"
+                        style="display: block;" required />
+                </div>
+                <div class="form-group form-check flex">
+                    <label class="form-check-label" for="exampleCheck1">مدرس</label>
+                    <input type="checkbox" class="form-check-input" name="isTeacher" id="exampleCheck1" />
+                </div>
+                <p class="actions">
+                    هل نسيت رقم المرور
+                    <a href="/resetPassword">استعاده رقم المرور</a> او
+                    <a href="/signup">
+                        <b>أنشئ حساب جديد
+                        </b>
+                    </a>
+                </p>
+                <button type="submit" class="btn bg-main">Login</button>
+            </form>
+        
+        </div>
+        <div id="our-goals">
+
+            <div class="our-goals_paragraph">
+                <p>
+                    Our goal is to raise the level of our children intellectual and educational to the latest global
+                    assessment
+                    methods that
+                    applied by the Ministry of Education
+                </p>
+                <p>هدفنا ان نرتقي بمستوي اولادنا الفكري و التعليمي الي احدث طرق التقييم العالمية و التي تطبقها وزاره
+                    التربية و
+                    التعليم</p>
+
+                <a class="btn-main" href="/public/about">اعرف اكتر</a>
+            </div>
+            <div class="our-goals_image">
+                <video src="/images/videoplayback (2).mp4" title="Introduction" controls="true"></video>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../includes/footer.ejs') %>
+
+    <!-- JS here -->
+    <%- include('../includes/end.ejs') %>
+
+</body>
+
+</html>
